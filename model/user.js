@@ -9,14 +9,13 @@ const UserSchema = new mongoose.Schema({
         type: String,
         require : true,
         set: value => md5(value),
-        //再加一条，这样返回的信息中就不包含password了
+        //The returned message does not contain the password
         select: false,        
     },
     email : {
         type: String,
         require : true
     },
-    //用户的个人介绍
     is_International : {
         type: Boolean,
         default : null
@@ -36,13 +35,6 @@ const UserSchema = new mongoose.Schema({
 },
 { timestamps: true })
 
-
-
-/* const User = mongoose.model('User', UserSchema)
-
-//User.db.dropCollection('users')
-
-module.exports = { User } */
 
 module.exports = UserSchema
 

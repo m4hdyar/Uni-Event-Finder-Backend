@@ -1,23 +1,14 @@
 const express = require("express");
 const userCtrl = require("../controller/user");
 const userValidator = require("../validator/user");
-//const auth = require("../middleware/auth");
-
 
 const router = express.Router();
 
-// Authentication 用户登录
+// User Authentication 
 router.post("/users/login", userValidator.login, userCtrl.login);
 
-// Registration 用户注册
-//前端也需要验证，但是后端验证是必须的
-router.post("/users",userValidator.register,userCtrl.register); // 3. 通过验证，执行具体的控制器处理
-
-/* // Get Current User 获取当前登录用户
-router.get("/user", auth, userCtrl.getCurrentUser);
-
-// Update User 更新用户
-router.put("/user", auth, userCtrl.updateUser); */
+//User  Registration 
+router.post("/users",userValidator.register,userCtrl.register); 
 
 module.exports = router;
 

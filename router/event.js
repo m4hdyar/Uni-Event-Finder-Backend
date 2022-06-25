@@ -21,19 +21,6 @@ router.post("/", auth, eventValidator.createEvent,eventCtrl.createEvent );
 router.put("/:eventId", auth, eventValidator.updateEvent , eventCtrl.updateEvent );
 // Delete event
 router.delete("/:eventId", auth, eventValidator.deleteEvent , eventCtrl.deleteEvent );
-/* // Add Comments to an event
-router.post("/:slug/comments", eventCtrl.addCommentsToevent);
 
-// Get Comments from an event
-router.get("/:slug/comments", eventCtrl.getCommentsFromevent);
-
-// Delete Comment
-router.delete("/:slug/comments/:id", eventCtrl.deleteComment);
-
-// Favorite event
-router.post("/:slug/favorite", eventCtrl.favoriteevent);
-
-// Unfavorite event
-router.delete("/:slug/favorite", eventCtrl.unfavoriteevent); */
 
 module.exports = router;

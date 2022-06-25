@@ -1,65 +1,64 @@
-//将【验证规则】抽离出来，依赖需要加载
+
 const { body } = require("express-validator");
 const validate = require("../middleware/validate");
-const {Admin} = require('../model')//错误消息是通过model统一打印，因此不是'../model/user'
+const {Admin} = require('../model')//Error messages are printed uniformly through the model, so it's not '... /model/user'
 const md5 = require("../util/md5");
 
 exports.register = validate([
-    // 1. 配置验证规则
+    // 1. Configure authentication rules
     body("admin.username")
-      .notEmpty().withMessage("用户名不能为空")
+      .notEmpty().withMessage("Username cannot be empty")
       .custom(async (value) => {
-        // 查询数据库查看数据是否存在
+        // Query the database to see if the data exists
         const admin = await Admin.findOne({ username: value });
         if (admin) {
-          return Promise.reject("用户已存在");
+          return Promise.reject("Admin already exists");
         }
     }),
       
-    body("admin.password").notEmpty().withMessage("密码不能为空"),
+    body("admin.password").notEmpty().withMessage("Password cannot be empty"),
     
     body("admin.email")
-      .notEmpty().withMessage("邮箱不能为空")
-      .isEmail().withMessage("邮箱格式不正确")
-      .bail() // 如果错误就不向下执行
+      .notEmpty().withMessage("Email cannot be empty")
+      .isEmail().withMessage("Incorrect email format")
+      .bail() // No downward execution if error
       .custom(async (value) => {
-        // 查询数据库查看数据是否存在
+        // Query the database to see if the data exists
         const admin = await Admin.findOne({ email: value });
         if (admin) {
-          return Promise.reject("邮箱已存在");
+          return Promise.reject("Email already exists");
         }
     }),
 ]);
 
-//将login导出为数组，配置多个validate
+//Export logins as arrays, configure multiple validates
 exports.login = [
     validate([
-      body("admin.email").notEmpty().withMessage("邮箱不能为空"),
-      body("admin.password").notEmpty().withMessage("密码不能为空"),
+      body("admin.email").notEmpty().withMessage("Email cannot be empty"),
+      body("admin.password").notEmpty().withMessage("Password cannot be empty"),
     ]),
-    // 验证用户是否存在
+    // Verify that the user exists
     validate([
       body("admin.email").custom(async (email, { req }) => {
-        //在./model/user.js中把user.password设置为了select:false，即不返回密码，需要用select方法调用出来
-        //除了password还需要其他数据，写成数组，查询出来方便比对
+        //In . /model/user.js set user.password to select:false, i.e. it does not return the password and needs to be called with the select method
         const admin = await Admin.findOne({ email }).select([
           "email",
           "password",
           "username"
         ]);
-        // 查询数据库查看数据是否存在
+        // Query the database to see if the data exists
         if (!admin) {
-          return Promise.reject("用户不存在");
+          return Promise.reject("Admin does not exist");
         }
-        // 将数据挂载到请求对象中，后续的中间件也可以直接使用，就不需要重复查询了
+        // By mounting the data into the request object, the subsequent middleware can also be used directly, so there is no need to repeat the query
         req.admin = admin;
       }),
     ]),
-    // 验证密码是否正确
+    // Verify that the password is correct
     validate([
       body("admin.password").custom(async (password, { req }) => {        
         if (md5(password) !== req.admin.password) {
-          return Promise.reject("密码错误");
+          return Promise.reject("Password wrong");
         }
       }),
     ]),

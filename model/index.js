@@ -4,7 +4,7 @@ const { dbUrl } = require("../config/config.default")
 
 mongoose.connect(dbUrl)
 
-//组织倒出模型类
+//Organizational export model class
 module.exports = {
     User: mongoose.model('User',require('./user')),
     Admin: mongoose.model('Admin',require('./admin')),

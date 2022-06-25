@@ -12,18 +12,13 @@ exports.createEvent = validate([
   
   exports.getEvent = validate([
     validate.isValidObjectId(["params"], "eventId"),
-    // param("eventId").custom(async (value) => {
-    //   if (!mongoose.isValidObjectId(value)) {
-    //     return Promise.reject("文章ID类型错误");
-    //   }
-    // }),
   ]);
   
   exports.updateEvent = [
-    // 校验id是否是ObjectID
+
     validate([validate.isValidObjectId(["params"], "eventId"),]),
   
-  // 校验文章是否存在
+  // Verify that the article exists
     async (req, res, next) => {
       const eventId = req.params.eventId;
       const event = await Event.findById(eventId);
@@ -33,9 +28,9 @@ exports.createEvent = validate([
       }
       next();
     },
-    // 判断 修改的文章作者是否是当前登录用户
+    
+    // Determine if the author of the modified article is the currently logged-in admin
     async (req, res, next) => {
-      //console.log(typeof(req.admin._id), typeof(req.event.publisher));// object object
       if (req.admin._id.toString() !== req.event.publisher.toString()) {
         return res.status(403).end();
       }

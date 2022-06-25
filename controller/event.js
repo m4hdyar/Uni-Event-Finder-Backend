@@ -4,42 +4,33 @@ const { Event } = require("../model");
 // List Events
 exports.listEvents = async (req, res, next) => {
   try {
-    // 解析数据参数，并设置默认值
+    // Parse data parameters and set default values
     const { limit = 20, offset = 0, tag } = req.query;
 
-    // 定义一个过滤对象
+   // define a filter object
     const filter = {};
     if (tag) {
-      filter.categoryList = category;//只要包含tag就能查询出来
+      filter.categoryList = category;// As long as it contains a categor, it can be queried
     }
 
     const events = await Event.find(filter)
-      .skip(+offset) // 跳过多少条
-      .limit(+limit); // 取多少条
+      .skip(+offset) // How many entries are skipped
+      .limit(+limit); // How many bars to take
     const eventsCont = await Event.countDocuments();
     res.status(200).json({
       events,
       eventsCont,
     });
-    //res.send("get /articles/");
   } catch (err) {
     next(err);
   }
 };
-/* // Feed Events
-exports.feedEvents = async (req, res, next) => {
-  try {
-    // 处理请求
-    res.send("get /Events/feed");
-  } catch (err) {
-    next(err);
-  }
-} */
+
 
 //Get Events
 exports.getEvent = async (req, res, next) => {
   try {
-    // 处理请求
+    // handle the request
     const event = await Event.findById(req.params.eventId).populate("publisher");
     if (!event) {
       return res.status(404).end();
@@ -55,12 +46,12 @@ exports.getEvent = async (req, res, next) => {
 //creat Event
 exports.createEvent = async (req, res, next) => {
   try {
-    // 处理请求
+    // handle the request
     const event = new Event(req.body.event);
     
-    // 通过身份认证解析到的用户对象，获取id属性
+    // Get the id attribute of the admin object resolved by authentication
     event.publisher = req.admin._id;
-    // 将数据映射到User并执行以下
+    // Map the data to admin and execute the following
     event.populate("publisher");
     
     await event.save();
@@ -97,7 +88,7 @@ exports.updateEvent = async (req, res, next) => {
 //delete Article
 exports.deleteEvent = async (req, res, next) => {
   try {
-    // 处理请求
+    // handle the request
     const event = req.event;
     await event.remove();
   } catch (err) {
@@ -105,53 +96,5 @@ exports.deleteEvent = async (req, res, next) => {
   }
 } 
 
-/* //// Add Comments to an Article
-exports.addCommentsToArticle = async (req, res, next) => {
-  try {
-    // 处理请求
-    res.send("post /Events/:slug/comments");
-  } catch (err) {
-    next(err);
-  }
-}
 
-// Get Comments from an Article
-exports.getCommentsFromArticle =  async (req, res, next) => {
-  try {
-    // 处理请求
-    res.send("get /Events/:slug/comments");
-  } catch (err) {
-    next(err);
-  }
-}
-
-// Delete Comment
-exports.deleteComment = async (req, res, next) => {
-  try {
-    // 处理请求
-    res.send("delete /Events/:slug/comments/:id");
-  } catch (err) {
-    next(err);
-  }
-}
-
-// Favorite Article
-exports.favoriteArticle = async (req, res, next) => {
-  try {
-    // 处理请求
-    res.send("post /Events/:slug/favorite");
-  } catch (err) {
-    next(err);
-  }
-}
-
-//Unfavorite Article
-exports.unfavoriteArticle = async (req, res, next) => {
-  try {
-    // 处理请求
-    res.send("delete /Events/:slug/favorite");
-  } catch (err) {
-    next(err);
-  }
-} */
 

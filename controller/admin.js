@@ -2,48 +2,41 @@ const { Admin } = require('../model')
 const jwt = require("../util/jwt");
 const { jwtSecret } = require("../config/config.default");
 
-// Authentication 用户登录
+// Admin Authentication
 exports.login = async (req, res, next) => {
     try {
-      // 处理请求
-      // 得到用户信息[mongosse数据对象 转换成 json数据对象，方便操作]
+      // handle the request
+      // Get user information 
       const admin = req.admin.toJSON();
-      // 生成token
-      const token = await jwt.sign(
-        {
-          adminId: admin._id,
-          //是数据验证成功后的数据库里对应的Admin的id，不是new Admin后的Admin的id
-        },
-        jwtSecret
-      );
-      //发送成功响应前移除密码属性
+      // generate token
+      const token = await jwt.sign({adminId: admin._id,},jwtSecret);
+      //Remove the password attribute before sending a successful response
       delete admin.password;
-      // 发送成功响应（包含token的用户信息）
+      // Send a successful response (including the admin information of the token)
       res.status(200).json({
         ...admin,
         token,
       });
-      //res.send("post /admins/login");
     } catch (err) {
       next(err);
     }
 };
   
   
-// Admin Registration 用户注册
+// Admin Registration
 exports.register = async (req, res, next) => {
     try {
-        // 1.获取请求体数据
-        // 2.数据验证:①基本数据验证；②业务数据验证（如：邮箱、用户名不能重复）
-        // 3. 验证通过，将数据保存到数据库
+        // 1. Get the request body data
+        // 2. Data verification: ①Basic data verification; ②Business data verification (such as: mailbox, user name cannot be repeated)
+        // 3. After the verification is passed, save the data to the database
         let admin = new Admin(req.body.admin);
-        //保存到数据库
+        //save to database
         await admin.save();
-        //不加这一行，密码删不掉，Admin是mongoose提供的数据对象，需要转化成JSON才能移除
+        //Without this line, the password cannot be deleted. Admin is a data object provided by mongoose, which needs to be converted into JSON to be removed.
         admin = admin.toJSON();
         delete admin.password;
 
-        // 4. 发送成功响应
+        // 4. Send a successful response
         res.status(201).json({
             admin
         });    
@@ -52,10 +45,10 @@ exports.register = async (req, res, next) => {
     }
 };
   
-// Get Current Admin 获取当前登录用户
+// Get Current Admin 
 exports.getCurrentAdmin = async (req, res, next) => {
     try {
-      // 处理请求
+     // handle the request
       res.status(200).json({
         admin: req.admin,
       });
@@ -65,10 +58,10 @@ exports.getCurrentAdmin = async (req, res, next) => {
 };
 
  
-// Update Admin 更新用户
+// Update Admin 
 exports.updateAdmin = async (req, res, next) => {
     try {
-        // 处理请求
+        // handle the request
         res.send("put /Admin");
     } catch (err) {
         next(err);

@@ -9,7 +9,7 @@ const AdminSchema = new mongoose.Schema({
         type: String,
         require : true,
         set: value => md5(value),
-        //再加一条，这样返回的信息中就不包含password了
+        //so that the returned message does not contain the password
         select: false,        
     },
     email : {
@@ -19,13 +19,6 @@ const AdminSchema = new mongoose.Schema({
 },
 { timestamps: true })
 
-
-
-/* const Admin = mongoose.model('Admin', AdminSchema)
-
-//Admin.db.dropCollection('Admins')
-
-module.exports = { Admin } */
 
 module.exports = AdminSchema
 
