@@ -1,10 +1,11 @@
 var express = require('express');
-var router = express.Router();
+const router = require("../router");
 
 const MongoClient = require("mongodb").MongoClient;
 
 // Create Express app
 const app = express();
+app.use(router);
 
 // Initialize parameters
 const port = eval("process.env.PORT") || 3600;
