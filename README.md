@@ -198,8 +198,12 @@ Result:
 ### List Events  
 URL: http://localhost:3600/api/events  
 Request Method: GET  
-Request Parameters: null  
-Result:  
+Request Parameters: null OR you can input a category that you areinterested.  
+Input example:  
+Key|Value
+---|---
+category| job 
+Result(input nothing):  
 ```
 {
     "events": [
@@ -273,6 +277,31 @@ Result:
             "updatedAt": "2022-06-26T13:43:35.287Z",
             "__v": 0
         },
+        {
+            "_id": "62b862996d74534139e57923",
+            "title": "event5",
+            "description": "I'm admin4",
+            "start_Date": "2022-06-26T00:00:00.000Z",
+            "end_Date": "2022-06-26T00:00:00.000Z",
+            "categoryList": [
+                "job"
+            ],
+            "is_International": null,
+            "is_Job_Event": null,
+            "is_Very_Important": null,
+            "publisher": "62b729f94d80f3819c9c82d1",
+            "createdAt": "2022-06-26T13:43:53.574Z",
+            "updatedAt": "2022-06-26T13:43:53.574Z",
+            "__v": 0
+        }
+    ],
+    "eventsCont": 5
+}
+```
+Result(input category):  
+```
+{
+    "events": [
         {
             "_id": "62b862996d74534139e57923",
             "title": "event5",
