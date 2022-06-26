@@ -2,44 +2,57 @@ Run the command `npm run-script start` to start the server.
 
 Before, you need to set the `MONGO_DB_PASSWORD` environmental variable to our top secret password as in described [here](https://stackoverflow.com/a/59104649/18625853) (for example, with `export MONGO_DB_PASSWORD=xyz`).
 
-2022-06-25 Update
-Use mongoose to connect to mongoDB local database, you need to install and download it on your computer, refer to: https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/
+### 2022-06-25 Update
+Use mongoose to connect to mongoDB local database, you need to install and download it on your computer, refer to: https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/  
 
-Used npm dependencies: express; mongoose; morgan; cors; express-validator; jsonwebtoken;
-You need to install the dependencies before you can run the script
+Used npm dependencies: express; mongoose; morgan; cors; express-validator; jsonwebtoken;  
 
-APIs(All data is in JSON format):
+You need to install the dependencies before you can run the script  
 
-Method Description: User Registration
-URL: http://localhost:3600/api/users/
+ 
+#### APIs (All data is in JSON format):
+
+#### User Registration  
+URL: http://localhost:3600/api/users/  
 Request Method: POST
-Request Parameters:{
-    "user":{
-        "username":"user1",
-        "email":"user1@user.user",
-        "password":"123456"
-    }
-}
-Result:{
+Request Parameters:  
+```
+{  
+    "user":{  
+        "username":"user1",  
+        "email":"user1@user.user",  
+        "password":"123456"  
+    }  
+}  
+```
+Result:  
+```
+{  
     "_id": "62b71d71221ea387a4d97fae",
     "username": "user1",
     "email": "user1@user.user",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI3MWQ3MTIyMWVhMzg3YTRkOTdmYWUiLCJpYXQiOjE2NTYxNjc4MTJ9.xuqpPIoAHG4FzLFjkkCIUPIt0MtUD5LfN5k48gmmBxE"
 }
+```
 
 
+#### User Authentication  
+URL: http://localhost:3600/api/users/login  
+Request Method: POST  
+Request Parameters:  
 
-Method Description: User Authentication
-URL: http://localhost:3600/api/users/login
-Request Method: POST
-Request Parameters:{
+```
+{
     "user":{
         "username":"user1",
         "email":"user1@user.user",
         "password":"123456"
     }
 }
-Result:{
+```
+Result:  
+```
+{
     "user": {
         "username": "user1",
         "email": "user1@user.user",
@@ -53,20 +66,25 @@ Result:{
         "__v": 0
     }
 }
+```
 
 
-
-Method Description: Admin Registration
-URL: http://localhost:3600/api/admins/
-Request Method: POST
-Request Parameters:{
+#### Admin Registration  
+URL: http://localhost:3600/api/admins/  
+Request Method: POST  
+Request Parameters:  
+```
+{
     "admin":{
         "username":"admin1",
         "email":"admin1@admin.admin",
         "password":"123456"
     }
 }
-Result: {
+```
+Result:   
+```
+{
     "admin": {
         "username": "admin3",
         "email": "admin3@admin.admin",
@@ -76,33 +94,42 @@ Result: {
         "__v": 0
     }
 }
+```
 
 
-
-Method Description: Admin Authentication
-URL: http://localhost:3600/api/admins/login
-Request Method: POST
-Request Parameters:{
+#### Admin Authentication  
+URL: http://localhost:3600/api/admins/login  
+Request Method: POST  
+Request Parameters:  
+```
+{
     "admin":{
         "username":"admin1",
         "email":"admin1@admin.admin",
         "password":"123456"
     }
 }
-Result: {
+```
+Result: 
+```
+{
     "_id": "62b729f94d80f3819c9c82d1",
     "username": "admin1",
     "email": "admin1@admin.admin",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjJiNzI5Zjk0ZDgwZjM4MTljOWM4MmQxIiwiaWF0IjoxNjU2MTcxMTEzfQ.rly-gLWBRMTS3XOWnUm5-sySbmQYRy9oQkX0w4YcS8Q"
 }
+```
 
 
-
-Method Description: Get Current Admin
-URL: http://localhost:3600/api/admin
-Request Method: GET
-Request Parameters: in Header you need add a key named Authorization, and its is Bear (+the token you get from Admin Authentication Result), value example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjJiNzI5Zjk0ZDgwZjM4MTljOWM4MmQxIiwiaWF0IjoxNjU2MTcxMTEzfQ.rly-gLWBRMTS3XOWnUm5-sySbmQYRy9oQkX0w4YcS8Q
-Result:{
+#### Get Current Admin  
+URL: http://localhost:3600/api/admin  
+Request Method: GET  
+Request Parameters: in Header you need add a key named Authorization, and its is Bear (+the token you get from Admin Authentication Result),   
+value example: 
+>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjJiNzI5Zjk0ZDgwZjM4MTljOWM4MmQxIiwiaWF0IjoxNjU2MTcxMTEzfQ.rly-gLWBRMTS3XOWnUm5-sySbmQYRy9oQkX0w4YcS8Q
+Result:  
+```
+{
     "admin": {
         "_id": "62b729f94d80f3819c9c82d1",
         "username": "admin1",
@@ -112,21 +139,22 @@ Result:{
         "__v": 0
     }
 }
+```
 
 
-
-Method Description: Update Admin
-URL: http://localhost:3600/api/admin
-Request Method: PUT
-Request Parameters: same as "Get Current Admin"
-Result: put /Admin (this curd only has basic function)
-
+#### Update Admin  
+URL: http://localhost:3600/api/admin  
+Request Method: PUT  
+Request Parameters: same as "Get Current Admin"  
+Result: put /Admin (this curd only has basic function)  
 
 
-Method Description: Creat Event
-URL: http://localhost:3600/api/events
-Request Method: POST
-Request Parameters: {
+#### Creat Event  
+URL: http://localhost:3600/api/events  
+Request Method: POST  
+Request Parameters:  
+```
+{
     "event":{
         "title":"event1",
         "description":"I'm admin1",
@@ -135,7 +163,10 @@ Request Parameters: {
         "categoryList":["music","sport"]
     }
 }
-Result:{
+```
+Result:  
+```
+{
     "event": {
         "title": "event1",
         "description": "I'm admin1",
@@ -155,15 +186,17 @@ Result:{
         "__v": 0
     }
 }
+```
 
 
 
-
-Method Description: List Events
-URL: http://localhost:3600/api/events
-Request Method: GET
-Request Parameters: null
-Result:{
+#### List Events  
+URL: http://localhost:3600/api/events  
+Request Method: GET  
+Request Parameters: null  
+Result:  
+```
+{
     "events": [
         {
             "_id": "62b72e9672d359fd5ae8f2da",
@@ -186,12 +219,15 @@ Result:{
     ],
     "eventsCont": 1
 }
+```
 
-Method Description: GET Event
-URL: http://localhost:3600/api/events/62b72e9672d359fd5ae8f2da (the /62b72e9672d359fd5ae8f2da is ObjectId in your event database)
-Request Method: GET
-Request Parameters: same as "Get Current Admin"
-Result:{
+#### GET Event  
+URL: http://localhost:3600/api/events/62b72e9672d359fd5ae8f2da (the /62b72e9672d359fd5ae8f2da is ObjectId in your event database)  
+Request Method: GET  
+Request Parameters: same as "Get Current Admin"  
+Result:  
+```
+{
     "event": {
         "_id": "62b72e9672d359fd5ae8f2da",
         "title": "event1",
@@ -218,13 +254,15 @@ Result:{
         "__v": 0
     }
 }
+```
 
 
-
-Method Description: Update Event
-URL: http://localhost:3600/api/events/62b72e9672d359fd5ae8f2da (the /62b72e9672d359fd5ae8f2da is ObjectId in your event database)
-Request Method: PUT
-Request Parameters: header's key and value are same as "Get Current Admin" and body need {
+#### Update Event  
+URL: http://localhost:3600/api/events/62b72e9672d359fd5ae8f2da (the /62b72e9672d359fd5ae8f2da is ObjectId in your event database)  
+Request Method: PUT  
+Request Parameters: header's key and value are same as "Get Current Admin" and body need   
+```
+{
     "event":{
         "title":"event1",
         "description":"I'm admin1",
@@ -233,7 +271,10 @@ Request Parameters: header's key and value are same as "Get Current Admin" and b
         "categoryList":["music","sport"]
     }
 }
-Result:{
+```
+Result:  
+```
+{
     "event": {
         "_id": "62b72e9672d359fd5ae8f2da",
         "title": "event1",
@@ -260,24 +301,24 @@ Result:{
         "__v": 0
     }
 }
+```
 
 
+#### Delete Event  
+URL: http://localhost:3600/api/events/62b72e9672d359fd5ae8f2da (the /62b72e9672d359fd5ae8f2da is ObjectId in your event database)  
+Request Method: DELETE  
+Request Parameters: same as "Get Current Admin"  
+Result: status is 200  
 
-Method Description: Delete Event
-URL: http://localhost:3600/api/events/62b72e9672d359fd5ae8f2da (the /62b72e9672d359fd5ae8f2da is ObjectId in your event database)
-Request Method: DELETE
-Request Parameters: same as "Get Current Admin"
-Result: status is 200
 
+#### Get Category  
+URL: http://localhost:3600/api/categories  
+Request Method: GET  
+Request Parameters: null  
+Result: get /Category (this curd only has basic function)  
 
-Method Description: Get Category
-URL: http://localhost:3600/api/categories
-Request Method: GET
-Request Parameters: null
-Result: get /Category (this curd only has basic function)
-
-Method Description: Get Profile
-URL: http://localhost:3600/api/profiles/vser1
-Request Method: GET
-Request Parameters: null
-Result: get /profile/:username (this curd only has basic function)
+#### Get Profile  
+URL: http://localhost:3600/api/profiles/vser1  
+Request Method: GET  
+Request Parameters: null  
+Result: get /profile/:username (this curd only has basic function)  
