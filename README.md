@@ -2,7 +2,7 @@ Run the command `npm run-script start` to start the server.
 
 Before, you need to set the `MONGO_DB_PASSWORD` environmental variable to our top secret password as in described [here](https://stackoverflow.com/a/59104649/18625853) (for example, with `export MONGO_DB_PASSWORD=xyz`).
 
-### 2022-06-25 Update
+# Backend
 Use mongoose to connect to mongoDB local database, you need to install and download it on your computer, refer to: https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/  
 
 Used npm dependencies: express; mongoose; morgan; cors; express-validator; jsonwebtoken;  
@@ -10,12 +10,13 @@ Used npm dependencies: express; mongoose; morgan; cors; express-validator; jsonw
 You need to install the dependencies before you can run the script  
 
  
-#### APIs (All data is in JSON format):
+## APIs (All data are in JSON format):
 
-#### User Registration  
+### User Registration  
 URL: http://localhost:3600/api/users/  
-Request Method: POST
+Request Method: POST  
 Request Parameters:  
+
 ```
 {  
     "user":{  
@@ -35,7 +36,7 @@ Result:
 ```
 
 
-#### User Authentication  
+### User Authentication  
 URL: http://localhost:3600/api/users/login  
 Request Method: POST  
 Request Parameters:  
@@ -68,7 +69,7 @@ Result:
 ```
 
 
-#### Admin Registration  
+### Admin Registration  
 URL: http://localhost:3600/api/admins/  
 Request Method: POST  
 Request Parameters:  
@@ -96,7 +97,7 @@ Result:
 ```
 
 
-#### Admin Authentication  
+### Admin Authentication  
 URL: http://localhost:3600/api/admins/login  
 Request Method: POST  
 Request Parameters:  
@@ -120,12 +121,16 @@ Result:
 ```
 
 
-#### Get Current Admin  
+### Get Current Admin  
 URL: http://localhost:3600/api/admin  
 Request Method: GET  
-Request Parameters: in Header you need add a key named Authorization, and its is Bear (+the token you get from Admin Authentication Result),   
-value example: 
->Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjJiNzI5Zjk0ZDgwZjM4MTljOWM4MmQxIiwiaWF0IjoxNjU2MTcxMTEzfQ.rly-gLWBRMTS3XOWnUm5-sySbmQYRy9oQkX0w4YcS8Q  
+Request Parameters: in Header you need add a **KEY** named Authorization, and its **VALUE** is Bearer (+the token you get from **Admin Authentication Result**),   
+example: 
+
+KEY|VALUE
+---|---  
+Authorization|Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjJiNzI5Zjk0ZDgwZjM4MTljOWM4MmQxIiwiaWF0IjoxNjU2MTcxMTEzfQ.rly-gLWBRMTS3XOWnUm5-sySbmQYRy9oQkX0w4YcS8Q  
+
 
 Result:  
 ```
@@ -142,14 +147,14 @@ Result:
 ```
 
 
-#### Update Admin  
+### Update Admin  
 URL: http://localhost:3600/api/admin  
 Request Method: PUT  
-Request Parameters: same as "Get Current Admin"  
+Request Parameters: same as "**Get Current Admin**"  
 Result: put /Admin (this curd only has basic function)  
 
 
-#### Creat Event  
+### Creat Event  
 URL: http://localhost:3600/api/events  
 Request Method: POST  
 Request Parameters:  
@@ -190,7 +195,7 @@ Result:
 
 
 
-#### List Events  
+### List Events  
 URL: http://localhost:3600/api/events  
 Request Method: GET  
 Request Parameters: null  
@@ -199,7 +204,7 @@ Result:
 {
     "events": [
         {
-            "_id": "62b72e9672d359fd5ae8f2da",
+            "_id": "62b823578fec0a9d2222a144",
             "title": "event1",
             "description": "I'm admin1",
             "start_Date": "2022-06-25T00:00:00.000Z",
@@ -212,19 +217,88 @@ Result:
             "is_Job_Event": null,
             "is_Very_Important": null,
             "publisher": "62b729f94d80f3819c9c82d1",
-            "createdAt": "2022-06-25T15:49:42.032Z",
-            "updatedAt": "2022-06-25T15:49:42.032Z",
+            "createdAt": "2022-06-26T09:13:59.933Z",
+            "updatedAt": "2022-06-26T09:13:59.933Z",
+            "__v": 0
+        },
+        {
+            "_id": "62b8236d8fec0a9d2222a148",
+            "title": "event1",
+            "description": "I'm admin1",
+            "start_Date": "2022-06-25T00:00:00.000Z",
+            "end_Date": "2022-06-25T00:00:00.000Z",
+            "categoryList": [
+                "music",
+                "sport"
+            ],
+            "is_International": null,
+            "is_Job_Event": null,
+            "is_Very_Important": null,
+            "publisher": "62b729f94d80f3819c9c82d1",
+            "createdAt": "2022-06-26T09:14:21.712Z",
+            "updatedAt": "2022-06-26T09:14:21.712Z",
+            "__v": 0
+        },
+        {
+            "_id": "62b827608fec0a9d2222a14c",
+            "title": "event2",
+            "description": "I'm admin1",
+            "start_Date": "2022-06-26T00:00:00.000Z",
+            "end_Date": "2022-06-26T00:00:00.000Z",
+            "categoryList": [
+                "music"
+            ],
+            "is_International": null,
+            "is_Job_Event": null,
+            "is_Very_Important": null,
+            "publisher": "62b729f94d80f3819c9c82d1",
+            "createdAt": "2022-06-26T09:31:12.372Z",
+            "updatedAt": "2022-06-26T09:31:12.372Z",
+            "__v": 0
+        },
+        {
+            "_id": "62b862876d74534139e5791f",
+            "title": "event4",
+            "description": "I'm admin4",
+            "start_Date": "2022-06-26T00:00:00.000Z",
+            "end_Date": "2022-06-26T00:00:00.000Z",
+            "categoryList": [
+                "party"
+            ],
+            "is_International": null,
+            "is_Job_Event": null,
+            "is_Very_Important": null,
+            "publisher": "62b729f94d80f3819c9c82d1",
+            "createdAt": "2022-06-26T13:43:35.287Z",
+            "updatedAt": "2022-06-26T13:43:35.287Z",
+            "__v": 0
+        },
+        {
+            "_id": "62b862996d74534139e57923",
+            "title": "event5",
+            "description": "I'm admin4",
+            "start_Date": "2022-06-26T00:00:00.000Z",
+            "end_Date": "2022-06-26T00:00:00.000Z",
+            "categoryList": [
+                "job"
+            ],
+            "is_International": null,
+            "is_Job_Event": null,
+            "is_Very_Important": null,
+            "publisher": "62b729f94d80f3819c9c82d1",
+            "createdAt": "2022-06-26T13:43:53.574Z",
+            "updatedAt": "2022-06-26T13:43:53.574Z",
             "__v": 0
         }
     ],
-    "eventsCont": 1
+    "eventsCont": 5
 }
 ```
 
-#### GET Event  
-URL: http://localhost:3600/api/events/62b72e9672d359fd5ae8f2da (the /62b72e9672d359fd5ae8f2da is ObjectId in your event database)  
+### GET Event  
+URL: http://localhost:3600/api/events/62b72e9672d359fd5ae8f2da (the ***/62b72e9672d359fd5ae8f2da*** is ObjectId in your event database)  
 Request Method: GET  
-Request Parameters: same as "Get Current Admin"  
+Request Parameters: same as "**Get Current Admin**"  
 Result:  
 ```
 {
@@ -257,10 +331,10 @@ Result:
 ```
 
 
-#### Update Event  
+### Update Event  
 URL: http://localhost:3600/api/events/62b72e9672d359fd5ae8f2da (the /62b72e9672d359fd5ae8f2da is ObjectId in your event database)  
 Request Method: PUT  
-Request Parameters: header's key and value are same as "Get Current Admin" and body need   
+Request Parameters: header's key and value are same as "**Get Current Admin**" and body need. If the event is **not created** by the admin that you **login**,  then you can't update the event,you will get a status **403 forbidden**.   
 ```
 {
     "event":{
@@ -304,20 +378,20 @@ Result:
 ```
 
 
-#### Delete Event  
-URL: http://localhost:3600/api/events/62b72e9672d359fd5ae8f2da (the /62b72e9672d359fd5ae8f2da is ObjectId in your event database)  
+### Delete Event  
+URL: http://localhost:3600/api/events/62b72e9672d359fd5ae8f2da (the ***/62b72e9672d359fd5ae8f2da*** is ObjectId in your event database)  
 Request Method: DELETE  
-Request Parameters: same as "Get Current Admin"  
+Request Parameters: same as "**Get Current Admin**", If the event is **not created** by the admin that you **login**,  then you can't update the event,you will get a status **403 forbidden**.   
 Result: status is 200  
 
 
-#### Get Category  
+### Get Category  
 URL: http://localhost:3600/api/categories  
 Request Method: GET  
 Request Parameters: null  
 Result: get /Category (this curd only has basic function)  
 
-#### Get Profile  
+### Get Profile  
 URL: http://localhost:3600/api/profiles/vser1  
 Request Method: GET  
 Request Parameters: null  

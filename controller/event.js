@@ -1,16 +1,16 @@
-// List Events
+
 const { Event } = require("../model");
 
 // List Events
 exports.listEvents = async (req, res, next) => {
   try {
     // Parse data parameters and set default values
-    const { limit = 20, offset = 0, tag } = req.query;
+    const { limit = 20, offset = 0, category } = req.query;
 
    // define a filter object
     const filter = {};
-    if (tag) {
-      filter.categoryList = category;// As long as it contains a categor, it can be queried
+    if (category) {
+      filter.categoryList = category;// As long as it contains a category, it can be queried
     }
 
     const events = await Event.find(filter)
@@ -43,7 +43,7 @@ exports.getEvent = async (req, res, next) => {
   }
 };
 
-//creat Event
+//create Event
 exports.createEvent = async (req, res, next) => {
   try {
     // handle the request
@@ -63,7 +63,7 @@ exports.createEvent = async (req, res, next) => {
   }
 };
 
-//update Article
+//update Event
 exports.updateEvent = async (req, res, next) => {
   try {
     const event = req.event;
