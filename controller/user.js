@@ -8,14 +8,12 @@ exports.login = async (req, res, next) => {
       // handle the request
       // get JSON User infomation
       const user = req.user.toJSON();
-      // produce token
-      const token = await jwt.sign({userId: user._id,},jwtSecret);
+      
       //Removes the password attribute before sending a successful response
       delete user.password;
       // Send success response (user information with token)
       res.status(200).json({
-        ...user,
-        token,
+        ...user
       });
       res.send("post /users/login");
     } catch (err) {

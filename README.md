@@ -30,8 +30,7 @@ Result:
 {  
     "_id": "62b71d71221ea387a4d97fae",
     "username": "user1",
-    "email": "user1@user.user",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmI3MWQ3MTIyMWVhMzg3YTRkOTdmYWUiLCJpYXQiOjE2NTYxNjc4MTJ9.xuqpPIoAHG4FzLFjkkCIUPIt0MtUD5LfN5k48gmmBxE"
+    "email": "user1@user.user"
 }
 ```
 
