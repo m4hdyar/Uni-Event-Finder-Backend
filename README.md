@@ -125,7 +125,8 @@ URL: http://localhost:3600/api/admin
 Request Method: GET  
 Request Parameters: in Header you need add a key named Authorization, and its is Bear (+the token you get from Admin Authentication Result),   
 value example: 
->Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjJiNzI5Zjk0ZDgwZjM4MTljOWM4MmQxIiwiaWF0IjoxNjU2MTcxMTEzfQ.rly-gLWBRMTS3XOWnUm5-sySbmQYRy9oQkX0w4YcS8Q
+>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjJiNzI5Zjk0ZDgwZjM4MTljOWM4MmQxIiwiaWF0IjoxNjU2MTcxMTEzfQ.rly-gLWBRMTS3XOWnUm5-sySbmQYRy9oQkX0w4YcS8Q  
+
 Result:  
 ```
 {
