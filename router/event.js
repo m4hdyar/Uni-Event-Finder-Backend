@@ -1,26 +1,24 @@
 const express = require("express");
 const eventCtrl = require("../controller/event")
 const eventValidator = require('../validator/event')
-const auth = require("../middleware/auth");
+const isAdmin = require("../middleware/auth_admin")
 
 const router = express.Router();
 
 // List Events
 router.get("/", eventCtrl.listEvents);
 
-/* // Feed Events
-router.get("/feed", eventCtrl.feedEvents); */
-
 // Get event
 router.get("/:eventId", eventValidator.getEvent, eventCtrl.getEvent);
 
 // Create event
-router.post("/", auth, eventValidator.createEvent,eventCtrl.createEvent );
+//router.post("/", auth,isAdmin, eventValidator.createEvent,eventCtrl.createEvent );
+router.post("/", isAdmin, eventValidator.createEvent,eventCtrl.createEvent );
 
 // Update event
-router.put("/:eventId", auth, eventValidator.updateEvent , eventCtrl.updateEvent );
+router.put("/:eventId", isAdmin, eventValidator.updateEvent , eventCtrl.updateEvent );
 // Delete event
-router.delete("/:eventId", auth, eventValidator.deleteEvent , eventCtrl.deleteEvent );
+router.delete("/:eventId", isAdmin, eventValidator.deleteEvent , eventCtrl.deleteEvent );
 
 
 module.exports = router;

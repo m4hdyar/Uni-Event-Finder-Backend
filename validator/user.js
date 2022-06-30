@@ -4,7 +4,6 @@ const {User} = require('../model')
 const md5 = require("../util/md5");
 
 exports.register = validate([
-
     body("user.username")
       .notEmpty().withMessage("Username cannot be empty")
       .custom(async (value) => {

@@ -5,16 +5,15 @@ const { Event } = require("../model");
 exports.listEvents = async (req, res, next) => {
   try {
     // Parse data parameters and set default values
-    const { limit = 20, offset = 0, category } = req.query;
+    const { limit = 5, category } = req.query;
 
    // define a filter object
     const filter = {};
     if (category) {
-      filter.categoryList = category;// As long as it contains a category, it can be queried
+      filter.category = category;// As long as it contains a category, it can be queried
     }
 
     const events = await Event.find(filter)
-      .skip(+offset) // How many entries are skipped
       .limit(+limit); // How many bars to take
     const eventsCont = await Event.countDocuments();
     res.status(200).json({
@@ -27,11 +26,11 @@ exports.listEvents = async (req, res, next) => {
 };
 
 
-//Get Events
+//Get Event
 exports.getEvent = async (req, res, next) => {
   try {
     // handle the request
-    const event = await Event.findById(req.params.eventId).populate("publisher");
+    const event = await Event.findById(req.params.eventId);
     if (!event) {
       return res.status(404).end();
     }
@@ -47,13 +46,7 @@ exports.getEvent = async (req, res, next) => {
 exports.createEvent = async (req, res, next) => {
   try {
     // handle the request
-    const event = new Event(req.body.event);
-    
-    // Get the id attribute of the admin object resolved by authentication
-    event.publisher = req.admin._id;
-    // Map the data to admin and execute the following
-    event.populate("publisher");
-    
+    const event = new Event(req.body.event); 
     await event.save();
     res.status(201).json({
       event,
@@ -72,10 +65,11 @@ exports.updateEvent = async (req, res, next) => {
     event.description = bodyEvent.description || event.description;
     event.start_Date = bodyEvent.start_Date || event.start_Date;
     event.end_Date = bodyEvent.end_Date || event.end_Date;
-    event.categoryList = bodyEvent.categoryList || event.categoryList;
+    event.category = bodyEvent.category || event.category;
     event.is_International = bodyEvent.is_International || event.is_International;
     event.is_Job_Event = bodyEvent.is_Job_Event || event.is_Job_Event;
     event.is_Very_Important = bodyEvent.is_Very_Important || event.is_Very_Important;
+    event.cost = bodyEvent.cost || event.cost;
     await event.save();
     res.status(200).json({
       event,
@@ -91,6 +85,7 @@ exports.deleteEvent = async (req, res, next) => {
     // handle the request
     const event = req.event;
     await event.remove();
+    res.status(204).end();
   } catch (err) {
     next(err);
   }

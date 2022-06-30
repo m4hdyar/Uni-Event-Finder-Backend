@@ -4,13 +4,13 @@ const router = express.Router();
 
 // User and admin related routing
 router.use(require("./user"));
-router.use(require("./admin"));
+//router.use(require("./admin"));
 
 //profile related routing
-router.use("/profiles", require("./profile"));
+router.use("/profile", require("./profile"));
 
 // event related routing
-router.use("/events", require("./event"));
+router.use("/event",require("./event"));
 
 // category related routing
 router.use(require("./category"));

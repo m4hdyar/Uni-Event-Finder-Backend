@@ -3,11 +3,10 @@ const validate = require("../middleware/validate");
 const { Event } = require('../model');
 
 exports.createEvent = validate([
-    body("event.title").notEmpty().withMessage("文章标题不能为空"),
-    body("event.description").notEmpty().withMessage("文章摘要不能为空"),
-    body("event.start_Date").notEmpty().withMessage("event.start_Date不能为空"),
-    body("event.end_Date").notEmpty().withMessage("event.end_Date不能为空"),
-     
+    body("event.title").notEmpty().withMessage("Event title can't be empty"),
+    body("event.description").notEmpty().withMessage("Event description can't be empty"),
+    body("event.start_Date").notEmpty().withMessage("Please enter a start date"),
+    body("event.end_Date").notEmpty().withMessage("Please enter a end date"),
   ]);
   
   exports.getEvent = validate([
@@ -29,13 +28,15 @@ exports.createEvent = validate([
       next();
     },
     
-    // Determine if the author of the modified article is the currently logged-in admin
+
+    //TODO: If the user isAdmin then c
+    /* // Determine if the author of the modified article is the currently logged-in admin
     async (req, res, next) => {
-      if (req.admin._id.toString() !== req.event.publisher.toString()) {
+      if (req.user._id.toString() !== req.event.publisher.toString()) {
         return res.status(403).end();
       }
       next();
-    },
+    }, */
   
   ]
   

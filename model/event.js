@@ -18,8 +18,8 @@ const EventSchema = new mongoose.Schema({
         type: Date,
         require : true
     },
-    categoryList: {
-        type: [String],
+    category: {
+        type: String,
         default: null,
     },
     is_International : {
@@ -34,10 +34,9 @@ const EventSchema = new mongoose.Schema({
         type: Boolean,
         default : null
     }, 
-    publisher: {
-        type: Schema.Types.ObjectId,
-        ref: "Admin",
-        required: true,
+    cost: {
+        type: Number,
+        default : null
     },
 },
 { timestamps: true })

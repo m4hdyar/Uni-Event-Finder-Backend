@@ -32,6 +32,14 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default : null
     },
+    interest_List: {
+        type: [String],
+        default: null,
+    },
+    is_Admin : {
+        type: String,
+        default : "0"
+    },//1-> admin; 0-> normal user
 },
 { timestamps: true })
 

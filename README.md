@@ -1,46 +1,28 @@
-Run the command `npm run-script start` to start the server.
-
-Before, you need to set the `MONGO_DB_PASSWORD` environmental variable to our top secret password as in described [here](https://stackoverflow.com/a/59104649/18625853) (for example, with `export MONGO_DB_PASSWORD=xyz`).
+Run the command `nodemon app.js` to start the server.
 
 # Backend
-Use mongoose to connect to mongoDB local database, you need to install and download it on your computer, refer to: https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/  
+## Database connection;  
+### For Local Database:  
+you need to install and download it on your computer, refer to: https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/  
+Before run the code makesure you use the local database url in the file config.default.js in the folder /config;  
+### For Cloud Database:  
+Before run the code, simply check the cloud database url in the file config.default.js in the folder /config work. Also you can replace the url to cennect you own cloud database
 
-Used npm dependencies: express; mongoose; morgan; cors; express-validator; jsonwebtoken;  
 
-You need to install the dependencies before you can run the script  
+## npm dependencies
+express; mongoose; morgan; cors; express-validator; jsonwebtoken  
+
+You need to check thesse dependencies before you can run the script  
 
  
 ## APIs (All data are in JSON format):
 
 ### User Registration  
-URL: http://localhost:3600/api/users/  
+URL: http://localhost:3600/api/users  
 Request Method: POST  
-Request Parameters:  
-
-```
-{  
-    "user":{  
-        "username":"user1",  
-        "email":"user1@user.user",  
-        "password":"123456"  
-    }  
-}  
-```
-Result:  
-```
-{  
-    "_id": "62b71d71221ea387a4d97fae",
-    "username": "user1",
-    "email": "user1@user.user"
-}
-```
-
-
-### User Authentication  
-URL: http://localhost:3600/api/users/login  
-Request Method: POST  
-Request Parameters:  
-
+  
+#### Normal user register example  
+Request Parameters:
 ```
 {
     "user":{
@@ -60,145 +42,143 @@ Result:
         "need_Job": null,
         "program": null,
         "major": null,
-        "_id": "62b71d71221ea387a4d97fae",
-        "createdAt": "2022-06-25T14:36:33.684Z",
-        "updatedAt": "2022-06-25T14:36:33.684Z",
+        "interest_List": [],
+        "is_Admin": "0",
+        "_id": "62be153e14c01562095218ac",
+        "createdAt": "2022-06-30T21:27:26.424Z",
+        "updatedAt": "2022-06-30T21:27:26.424Z",
         "__v": 0
     }
 }
 ```
-
-
-### Admin Registration  
-URL: http://localhost:3600/api/admins/  
-Request Method: POST  
-Request Parameters:  
+#### Admin register example
+Request Parameters: you need to set is_Admin to 1, so that this account will have the access to operate events  
 ```
 {
-    "admin":{
-        "username":"admin1",
-        "email":"admin1@admin.admin",
+    "user":{
+        "username":"admin",
+        "email":"admin@admin.admin",
+        "password":"123456",
+        "is_Admin": "1"
+    }
+} 
+```
+Result:  
+```
+{  
+    "_id": "62b71d71221ea387a4d97fae",
+    "username": "user1",
+    "email": "user1@user.user"
+}
+```
+### User Authentication  
+URL: http://localhost:3600/api/users/login  
+Request Method: POST  
+Request Parameters:  
+
+```
+{
+    "user":{
+        "username":"user1",
+        "email":"user1@user.user",
         "password":"123456"
     }
 }
 ```
-Result:   
+Result:  For token life time, it is 1 day, that means user need to login again after 1 day.  
 ```
 {
-    "admin": {
-        "username": "admin3",
-        "email": "admin3@admin.admin",
-        "_id": "62b72a434d80f3819c9c82d9",
-        "createdAt": "2022-06-25T15:31:15.573Z",
-        "updatedAt": "2022-06-25T15:31:15.573Z",
-        "__v": 0
-    }
+    "_id": "62be153e14c01562095218ac",
+    "username": "user1",
+    "email": "user1@user.user",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmJlMTUzZTE0YzAxNTYyMDk1MjE4YWMiLCJpYXQiOjE2NTY2MjU4OTgsImV4cCI6MTY1NjcxMjI5OH0.pT6wBPFD8SXZDwL4DTGoMbT2NENehX4IJOiCTov55Js"
 }
 ```
 
-
-### Admin Authentication  
-URL: http://localhost:3600/api/admins/login  
-Request Method: POST  
-Request Parameters:  
-```
-{
-    "admin":{
-        "username":"admin1",
-        "email":"admin1@admin.admin",
-        "password":"123456"
-    }
-}
-```
-Result: 
-```
-{
-    "_id": "62b729f94d80f3819c9c82d1",
-    "username": "admin1",
-    "email": "admin1@admin.admin",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjJiNzI5Zjk0ZDgwZjM4MTljOWM4MmQxIiwiaWF0IjoxNjU2MTcxMTEzfQ.rly-gLWBRMTS3XOWnUm5-sySbmQYRy9oQkX0w4YcS8Q"
-}
-```
-
-
-### Get Current Admin  
-URL: http://localhost:3600/api/admin  
+### Get Current User  
+URL: http://localhost:3600/api/user 
 Request Method: GET  
-Request Parameters: in Header you need add a **KEY** named Authorization, and its **VALUE** is Bearer (+the token you get from **Admin Authentication Result**),   
+Request Parameters: in Header you need add a **KEY** named Authorization, and its **VALUE** is Bearer (+the token you get from **User Authentication Result**),   
 example: 
 
 KEY|VALUE
 ---|---  
-Authorization|Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjJiNzI5Zjk0ZDgwZjM4MTljOWM4MmQxIiwiaWF0IjoxNjU2MTcxMTEzfQ.rly-gLWBRMTS3XOWnUm5-sySbmQYRy9oQkX0w4YcS8Q  
+Authorization|Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmJlMTUzZTE0YzAxNTYyMDk1MjE4YWMiLCJpYXQiOjE2NTY2MjU4OTgsImV4cCI6MTY1NjcxMjI5OH0.pT6wBPFD8SXZDwL4DTGoMbT2NENehX4IJOiCTov55Js  
 
 
 Result:  
 ```
 {
-    "admin": {
-        "_id": "62b729f94d80f3819c9c82d1",
-        "username": "admin1",
-        "email": "admin1@admin.admin",
-        "createdAt": "2022-06-25T15:30:01.295Z",
-        "updatedAt": "2022-06-25T15:30:01.295Z",
+    "user": {
+        "_id": "62be153e14c01562095218ac",
+        "username": "user1",
+        "email": "user1@user.user",
+        "is_International": null,
+        "need_Job": null,
+        "program": null,
+        "major": null,
+        "interest_List": [],
+        "is_Admin": "0",
+        "createdAt": "2022-06-30T21:27:26.424Z",
+        "updatedAt": "2022-06-30T21:27:26.424Z",
         "__v": 0
     }
 }
 ```
 
 
-### Update Admin  
-URL: http://localhost:3600/api/admin  
+### Update User  
+URL: http://localhost:3600/api/user  
 Request Method: PUT  
-Request Parameters: same as "**Get Current Admin**"  
-Result: put /Admin (this curd only has basic function)  
+Request Parameters: same as "**Get Current User**"  
+Result: put /User (this curd only has basic function)  
 
 
-### Creat Event  
-URL: http://localhost:3600/api/events  
+### Create Event  
+URL: http://localhost:3600/api/event  
 Request Method: POST  
-Request Parameters:  
+Request Parameters: For Create Event, you must **login with admin user account**, otherwise, you can't operate. 
 ```
 {
     "event":{
         "title":"event1",
-        "description":"I'm admin1",
-        "start_Date":"2022-06-25",
-        "end_Date":"2022-06-25",
-        "categoryList":["music","sport"]
+        "description":"I'm admin.",
+        "start_Date":"2022-06-30",
+        "end_Date":"2022-06-30",
+        "category":"job"
     }
 }
 ```
-Result:  
+Result(succeed):  
 ```
 {
     "event": {
         "title": "event1",
-        "description": "I'm admin1",
-        "start_Date": "2022-06-25T00:00:00.000Z",
-        "end_Date": "2022-06-25T00:00:00.000Z",
-        "categoryList": [
-            "music",
-            "sport"
-        ],
+        "description": "I'm admin.",
+        "start_Date": "2022-06-30T00:00:00.000Z",
+        "end_Date": "2022-06-30T00:00:00.000Z",
+        "category": "job",
         "is_International": null,
         "is_Job_Event": null,
         "is_Very_Important": null,
-        "_id": "62b72e9672d359fd5ae8f2da",
-        "publisher": "62b729f94d80f3819c9c82d1",
-        "createdAt": "2022-06-25T15:49:42.032Z",
-        "updatedAt": "2022-06-25T15:49:42.032Z",
+        "cost": null,
+        "_id": "62be1e49fd86eb39d04da902",
+        "createdAt": "2022-06-30T22:06:01.757Z",
+        "updatedAt": "2022-06-30T22:06:01.757Z",
         "__v": 0
     }
 }
 ```
-
+Result(failed):  And you will get a status 409
+```
+Sorry, you are not admin
+```
 
 
 ### List Events  
-URL: http://localhost:3600/api/events  
+URL: http://localhost:3600/api/event  
 Request Method: GET  
-Request Parameters: null OR you can input a category that you areinterested.  
+Request Parameters: null OR you can input a category(**in params**) that you are interested.  
 Input example:  
 Key|Value
 ---|---
@@ -208,94 +188,67 @@ Result(input nothing):
 {
     "events": [
         {
-            "_id": "62b823578fec0a9d2222a144",
+            "_id": "62be1e49fd86eb39d04da902",
             "title": "event1",
-            "description": "I'm admin1",
-            "start_Date": "2022-06-25T00:00:00.000Z",
-            "end_Date": "2022-06-25T00:00:00.000Z",
-            "categoryList": [
-                "music",
-                "sport"
-            ],
+            "description": "I'm admin.",
+            "start_Date": "2022-06-30T00:00:00.000Z",
+            "end_Date": "2022-06-30T00:00:00.000Z",
+            "category": "job",
             "is_International": null,
             "is_Job_Event": null,
             "is_Very_Important": null,
-            "publisher": "62b729f94d80f3819c9c82d1",
-            "createdAt": "2022-06-26T09:13:59.933Z",
-            "updatedAt": "2022-06-26T09:13:59.933Z",
+            "cost": null,
+            "createdAt": "2022-06-30T22:06:01.757Z",
+            "updatedAt": "2022-06-30T22:06:01.757Z",
             "__v": 0
         },
         {
-            "_id": "62b8236d8fec0a9d2222a148",
-            "title": "event1",
-            "description": "I'm admin1",
-            "start_Date": "2022-06-25T00:00:00.000Z",
-            "end_Date": "2022-06-25T00:00:00.000Z",
-            "categoryList": [
-                "music",
-                "sport"
-            ],
-            "is_International": null,
-            "is_Job_Event": null,
-            "is_Very_Important": null,
-            "publisher": "62b729f94d80f3819c9c82d1",
-            "createdAt": "2022-06-26T09:14:21.712Z",
-            "updatedAt": "2022-06-26T09:14:21.712Z",
-            "__v": 0
-        },
-        {
-            "_id": "62b827608fec0a9d2222a14c",
+            "_id": "62be1ea7fd86eb39d04da905",
             "title": "event2",
-            "description": "I'm admin1",
-            "start_Date": "2022-06-26T00:00:00.000Z",
-            "end_Date": "2022-06-26T00:00:00.000Z",
-            "categoryList": [
-                "music"
-            ],
+            "description": "I'm admin.",
+            "start_Date": "2022-06-30T00:00:00.000Z",
+            "end_Date": "2022-06-30T00:00:00.000Z",
+            "category": "job",
             "is_International": null,
             "is_Job_Event": null,
             "is_Very_Important": null,
-            "publisher": "62b729f94d80f3819c9c82d1",
-            "createdAt": "2022-06-26T09:31:12.372Z",
-            "updatedAt": "2022-06-26T09:31:12.372Z",
+            "cost": null,
+            "createdAt": "2022-06-30T22:07:35.580Z",
+            "updatedAt": "2022-06-30T22:07:35.580Z",
             "__v": 0
         },
         {
-            "_id": "62b862876d74534139e5791f",
+            "_id": "62be1eb4fd86eb39d04da908",
+            "title": "event3",
+            "description": "I'm admin.",
+            "start_Date": "2022-06-30T00:00:00.000Z",
+            "end_Date": "2022-06-30T00:00:00.000Z",
+            "category": "music",
+            "is_International": null,
+            "is_Job_Event": null,
+            "is_Very_Important": null,
+            "cost": null,
+            "createdAt": "2022-06-30T22:07:48.531Z",
+            "updatedAt": "2022-06-30T22:07:48.531Z",
+            "__v": 0
+        },
+        {
+            "_id": "62be1ec5fd86eb39d04da90b",
             "title": "event4",
-            "description": "I'm admin4",
-            "start_Date": "2022-06-26T00:00:00.000Z",
-            "end_Date": "2022-06-26T00:00:00.000Z",
-            "categoryList": [
-                "party"
-            ],
+            "description": "I'm admin.",
+            "start_Date": "2022-06-30T00:00:00.000Z",
+            "end_Date": "2022-06-30T00:00:00.000Z",
+            "category": "sports",
             "is_International": null,
             "is_Job_Event": null,
             "is_Very_Important": null,
-            "publisher": "62b729f94d80f3819c9c82d1",
-            "createdAt": "2022-06-26T13:43:35.287Z",
-            "updatedAt": "2022-06-26T13:43:35.287Z",
-            "__v": 0
-        },
-        {
-            "_id": "62b862996d74534139e57923",
-            "title": "event5",
-            "description": "I'm admin4",
-            "start_Date": "2022-06-26T00:00:00.000Z",
-            "end_Date": "2022-06-26T00:00:00.000Z",
-            "categoryList": [
-                "job"
-            ],
-            "is_International": null,
-            "is_Job_Event": null,
-            "is_Very_Important": null,
-            "publisher": "62b729f94d80f3819c9c82d1",
-            "createdAt": "2022-06-26T13:43:53.574Z",
-            "updatedAt": "2022-06-26T13:43:53.574Z",
+            "cost": null,
+            "createdAt": "2022-06-30T22:08:05.116Z",
+            "updatedAt": "2022-06-30T22:08:05.116Z",
             "__v": 0
         }
     ],
-    "eventsCont": 5
+    "eventsCont": 4
 }
 ```
 Result(input category):  
@@ -303,57 +256,60 @@ Result(input category):
 {
     "events": [
         {
-            "_id": "62b862996d74534139e57923",
-            "title": "event5",
-            "description": "I'm admin4",
-            "start_Date": "2022-06-26T00:00:00.000Z",
-            "end_Date": "2022-06-26T00:00:00.000Z",
-            "categoryList": [
-                "job"
-            ],
+            "_id": "62be1e49fd86eb39d04da902",
+            "title": "event1",
+            "description": "I'm admin.",
+            "start_Date": "2022-06-30T00:00:00.000Z",
+            "end_Date": "2022-06-30T00:00:00.000Z",
+            "category": "job",
             "is_International": null,
             "is_Job_Event": null,
             "is_Very_Important": null,
-            "publisher": "62b729f94d80f3819c9c82d1",
-            "createdAt": "2022-06-26T13:43:53.574Z",
-            "updatedAt": "2022-06-26T13:43:53.574Z",
+            "cost": null,
+            "createdAt": "2022-06-30T22:06:01.757Z",
+            "updatedAt": "2022-06-30T22:06:01.757Z",
+            "__v": 0
+        },
+        {
+            "_id": "62be1ea7fd86eb39d04da905",
+            "title": "event2",
+            "description": "I'm admin.",
+            "start_Date": "2022-06-30T00:00:00.000Z",
+            "end_Date": "2022-06-30T00:00:00.000Z",
+            "category": "job",
+            "is_International": null,
+            "is_Job_Event": null,
+            "is_Very_Important": null,
+            "cost": null,
+            "createdAt": "2022-06-30T22:07:35.580Z",
+            "updatedAt": "2022-06-30T22:07:35.580Z",
             "__v": 0
         }
     ],
-    "eventsCont": 5
+    "eventsCont": 4
 }
 ```
 
 ### GET Event  
-URL: http://localhost:3600/api/events/62b72e9672d359fd5ae8f2da (the ***/62b72e9672d359fd5ae8f2da*** is ObjectId in your event database)  
+URL: http://localhost:3600/api/event/62be1e49fd86eb39d04da902 (the ***/62be1e49fd86eb39d04da902*** is ObjectId in your event database)  
 Request Method: GET  
-Request Parameters: same as "**Get Current Admin**"  
+Request Parameters: You only need add ObjectId of the event you want to see.  
 Result:  
 ```
 {
     "event": {
-        "_id": "62b72e9672d359fd5ae8f2da",
+        "_id": "62be1e49fd86eb39d04da902",
         "title": "event1",
-        "description": "I'm admin1",
-        "start_Date": "2022-06-25T00:00:00.000Z",
-        "end_Date": "2022-06-25T00:00:00.000Z",
-        "categoryList": [
-            "music",
-            "sport"
-        ],
+        "description": "I'm admin.",
+        "start_Date": "2022-06-30T00:00:00.000Z",
+        "end_Date": "2022-06-30T00:00:00.000Z",
+        "category": "job",
         "is_International": null,
         "is_Job_Event": null,
         "is_Very_Important": null,
-        "publisher": {
-            "_id": "62b729f94d80f3819c9c82d1",
-            "username": "admin1",
-            "email": "admin1@admin.admin",
-            "createdAt": "2022-06-25T15:30:01.295Z",
-            "updatedAt": "2022-06-25T15:30:01.295Z",
-            "__v": 0
-        },
-        "createdAt": "2022-06-25T15:49:42.032Z",
-        "updatedAt": "2022-06-25T15:49:42.032Z",
+        "cost": null,
+        "createdAt": "2022-06-30T22:06:01.757Z",
+        "updatedAt": "2022-06-30T22:06:01.757Z",
         "__v": 0
     }
 }
@@ -361,17 +317,17 @@ Result:
 
 
 ### Update Event  
-URL: http://localhost:3600/api/events/62b72e9672d359fd5ae8f2da (the /62b72e9672d359fd5ae8f2da is ObjectId in your event database)  
+URL: http://localhost:3600/api/event/62be1e49fd86eb39d04da902 (the ***/62be1e49fd86eb39d04da902*** is ObjectId in your event database)  
 Request Method: PUT  
-Request Parameters: header's key and value are same as "**Get Current Admin**" and body need. If the event is **not created** by the admin that you **login**,  then you can't update the event,you will get a status **403 forbidden**.   
+Request Parameters: For Update Event, you must **login with admin user account**, otherwise, you can't operate.     
 ```
 {
     "event":{
         "title":"event1",
-        "description":"I'm admin1",
-        "start_Date":"2022-06-25",
-        "end_Date":"2022-06-28",
-        "categoryList":["music","sport"]
+        "description":"I'm admin.Change test.",
+        "start_Date":"2022-06-30",
+        "end_Date":"2022-06-30",
+        "category":"job"
     }
 }
 ```
@@ -379,40 +335,37 @@ Result:
 ```
 {
     "event": {
-        "_id": "62b72e9672d359fd5ae8f2da",
+        "_id": "62be1e49fd86eb39d04da902",
         "title": "event1",
-        "description": "I'm admin1",
-        "start_Date": "2022-06-25T00:00:00.000Z",
-        "end_Date": "2022-06-25T00:00:00.000Z",
-        "categoryList": [
-            "music",
-            "sport"
-        ],
+        "description": "I'm admin.Change test.",
+        "start_Date": "2022-06-30T00:00:00.000Z",
+        "end_Date": "2022-06-30T00:00:00.000Z",
+        "category": "job",
         "is_International": null,
         "is_Job_Event": null,
         "is_Very_Important": null,
-        "publisher": {
-            "_id": "62b729f94d80f3819c9c82d1",
-            "username": "admin1",
-            "email": "admin1@admin.admin",
-            "createdAt": "2022-06-25T15:30:01.295Z",
-            "updatedAt": "2022-06-25T15:30:01.295Z",
-            "__v": 0
-        },
-        "createdAt": "2022-06-25T15:49:42.032Z",
-        "updatedAt": "2022-06-25T15:49:42.032Z",
+        "cost": null,
+        "createdAt": "2022-06-30T22:06:01.757Z",
+        "updatedAt": "2022-06-30T22:19:02.854Z",
         "__v": 0
     }
 }
 ```
-
+Result(failed):  And you will get a status 409
+```
+Sorry, you are not admin
+```
 
 ### Delete Event  
-URL: http://localhost:3600/api/events/62b72e9672d359fd5ae8f2da (the ***/62b72e9672d359fd5ae8f2da*** is ObjectId in your event database)  
+URL: http://localhost:3600/api/event/62be1e49fd86eb39d04da902 (the ***/62be1e49fd86eb39d04da902*** is ObjectId in your event database)  
 Request Method: DELETE  
-Request Parameters: same as "**Get Current Admin**", If the event is **not created** by the admin that you **login**,  then you can't update the event,you will get a status **403 forbidden**.   
-Result: status is 200  
-
+Request Parameters: same as "**Update Event**",    
+Result: status 204  
+```
+Result(failed):  And you will get a status 409
+```
+Sorry, you are not admin
+```
 
 ### Get Category  
 URL: http://localhost:3600/api/categories  
@@ -421,7 +374,7 @@ Request Parameters: null
 Result: get /Category (this curd only has basic function)  
 
 ### Get Profile  
-URL: http://localhost:3600/api/profiles/vser1  
+URL: http://localhost:3600/api/profile/user1  
 Request Method: GET  
 Request Parameters: null  
 Result: get /profile/:username (this curd only has basic function)  
