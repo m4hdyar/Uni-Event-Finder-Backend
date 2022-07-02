@@ -26,18 +26,7 @@ exports.createEvent = validate([
         return res.status(404).end();
       }
       next();
-    },
-    
-
-    //TODO: If the user isAdmin then c
-    /* // Determine if the author of the modified article is the currently logged-in admin
-    async (req, res, next) => {
-      if (req.user._id.toString() !== req.event.publisher.toString()) {
-        return res.status(403).end();
-      }
-      next();
-    }, */
-  
+    }, 
   ]
   
   exports.deleteEvent = exports.updateEvent;

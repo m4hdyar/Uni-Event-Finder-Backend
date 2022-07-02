@@ -178,11 +178,14 @@ Sorry, you are not admin
 ### List Events  
 URL: http://localhost:3600/api/event  
 Request Method: GET  
-Request Parameters: null OR you can input a category(**in params**) that you are interested.  
+Request Parameters: null(you will get all events) OR you can input a filter(such as category,is_Internation,is_Job_Event,is_Very_Important,you can choose one or more input at a time ) **in params** that you are interested.  
 Input example:  
 Key|Value
 ---|---
-category| job 
+category| job   
+is_Internation|true
+is_Job_Event|false
+is_Very_Important|true
 Result(input nothing):  
 ```
 {
@@ -367,14 +370,108 @@ Result(failed):  And you will get a status 409
 Sorry, you are not admin
 ```
 
+### Get Profile  
+URL: http://localhost:3600/api/profile/user1  
+Request Method: GET  
+Request Parameters: in Header you need add a **KEY** named Authorization, and its **VALUE** is Bearer (+the token you get from **User Authentication Result**), you can only get the profile of the user that you logged in 
+example: 
+KEY|VALUE
+---|---  
+Authorization|Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmJlMTFlODU1YTVmZTU2OTZhZmM3NmMiLCJpYXQiOjE2NTY4MDA3NDksImV4cCI6MTY1Njg4NzE0OX0.2zAI5q__n4aWiSS0o1mBoS_VTSTyb4nY1H61bBeUK20  
+Result:   
+{
+    "profile": {
+        "_id": "62c0b84f0b0a74b146da793b",
+        "email": "user1@user.user",
+        "is_International": false,
+        "need_Job": false,
+        "program": "master",
+        "major": "comunication engineering",
+        "interest_List": [
+            "job"
+        ],
+        "user": "62be11e855a5fe5696afc76c",
+        "createdAt": "2022-07-02T21:27:43.941Z",
+        "updatedAt": "2022-07-02T21:27:43.941Z",
+        "__v": 0
+    }
+}
+### Create Profile  
+URL: http://localhost:3600/api/profile/user1  
+Request Method: GET  
+Request Parameters: in Header you need add a **KEY** named Authorization, and its **VALUE** is Bearer (+the token you get from **User Authentication Result**), if the user you logged in already has profile,then you can't create and get a status 400. 
+example: 
+KEY|VALUE
+---|---  
+Authorization|Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmJlMTFlODU1YTVmZTU2OTZhZmM3NmMiLCJpYXQiOjE2NTY4MDA3NDksImV4cCI6MTY1Njg4NzE0OX0.2zAI5q__n4aWiSS0o1mBoS_VTSTyb4nY1H61bBeUK20    
+```
+{
+    "profile":{"email" :"user1@user.user", 
+    "is_International": "false",
+    "need_Job" : "false",
+    "program" : "master",
+    "major" : "comunication engineering",
+    "interest_List": ["job"]
+}
+}
+```
+Result:   
+{
+    "profile": {
+        "_id": "62c0b84f0b0a74b146da793b",
+        "email": "user1@user.user",
+        "is_International": false,
+        "need_Job": false,
+        "program": "master",
+        "major": "comunication engineering",
+        "interest_List": [
+            "job"
+        ],
+        "user": "62be11e855a5fe5696afc76c",
+        "createdAt": "2022-07-02T21:27:43.941Z",
+        "updatedAt": "2022-07-02T21:27:43.941Z",
+        "__v": 0
+    }
+}
+### Update Profile  
+URL: http://localhost:3600/api/profile/user1  
+Request Method: GET  
+Request Parameters: in Header you need add a **KEY** named Authorization, and its **VALUE** is Bearer (+the token you get from **User Authentication Result**), you can only update the profile of the user that you logged in. 
+example: 
+KEY|VALUE
+---|---  
+Authorization|Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmJlMTFlODU1YTVmZTU2OTZhZmM3NmMiLCJpYXQiOjE2NTY4MDA3NDksImV4cCI6MTY1Njg4NzE0OX0.2zAI5q__n4aWiSS0o1mBoS_VTSTyb4nY1H61bBeUK20    
+```
+{
+    "profile":{"email" :"user1@user.user", 
+    "is_International": "false",
+    "need_Job" : "false",
+    "program" : "master",
+    "major" : "comunication engineering",
+    "interest_List": ["job","music"]
+}
+}
+```
+Result:   
+{
+    "profile": {
+        "_id": "62c0b84f0b0a74b146da793b",
+        "email": "user1@user.user",
+        "is_International": false,
+        "need_Job": false,
+        "program": "master",
+        "major": "comunication engineering",
+        "interest_List": [
+            "job","music"
+        ],
+        "user": "62be11e855a5fe5696afc76c",
+        "createdAt": "2022-07-02T21:27:43.941Z",
+        "updatedAt": "2022-07-02T21:27:43.941Z",
+        "__v": 0
+    }
+}
 ### Get Category  
 URL: http://localhost:3600/api/categories  
 Request Method: GET  
 Request Parameters: null  
 Result: get /Category (this curd only has basic function)  
-
-### Get Profile  
-URL: http://localhost:3600/api/profile/user1  
-Request Method: GET  
-Request Parameters: null  
-Result: get /profile/:username (this curd only has basic function)  

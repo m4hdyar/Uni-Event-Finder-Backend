@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;//Associate the event with the author admin, using mongoose's populate
+
 
 const EventSchema = new mongoose.Schema({
     title : { 

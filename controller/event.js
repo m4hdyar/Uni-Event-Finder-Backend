@@ -5,12 +5,22 @@ const { Event } = require("../model");
 exports.listEvents = async (req, res, next) => {
   try {
     // Parse data parameters and set default values
-    const { limit = 5, category } = req.query;
+    const { limit = 5, category,is_International,is_Job_Event,is_Very_Important } = req.query;
 
    // define a filter object
     const filter = {};
+    // As long as it contains a category, it can be queried
     if (category) {
-      filter.category = category;// As long as it contains a category, it can be queried
+      filter.category = category;
+    }
+    if (is_International){
+      filter.is_International = is_International;
+    }
+    if(is_Job_Event){
+      filter.is_Job_Event = is_Job_Event;
+    } 
+    if(is_Very_Important) {
+      filter.is_Very_Important = is_Very_Important;
     }
 
     const events = await Event.find(filter)

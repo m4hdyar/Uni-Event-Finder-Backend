@@ -12,7 +12,6 @@ router.get("/", eventCtrl.listEvents);
 router.get("/:eventId", eventValidator.getEvent, eventCtrl.getEvent);
 
 // Create event
-//router.post("/", auth,isAdmin, eventValidator.createEvent,eventCtrl.createEvent );
 router.post("/", isAdmin, eventValidator.createEvent,eventCtrl.createEvent );
 
 // Update event

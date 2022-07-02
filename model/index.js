@@ -7,6 +7,6 @@ mongoose.connect(dbUrl)
 //Organizational export model class
 module.exports = {
     User: mongoose.model('User',require('./user')),
-    //Admin: mongoose.model('Admin',require('./admin')),
+    Profile: mongoose.model('Profile',require('./profile')),
     Event: mongoose.model('Event',require('./event'))
 };
