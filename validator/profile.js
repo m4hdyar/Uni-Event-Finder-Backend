@@ -28,7 +28,7 @@ exports.validateUser = [
 exports.createProfile = [// validate if current user has a profile 
 async (req, res, next) => {
     //const expectUser = await User.findOne({username:req.params.username});
-    const profile = await Profile.findOne({user:req.user._id}); //找现在登录的用户是否有profile    
+    const profile = await Profile.findOne({user:req.user._id});   
     req.profile = profile;
   if (profile) {
     return res.status(400).json("Your profile already exists");

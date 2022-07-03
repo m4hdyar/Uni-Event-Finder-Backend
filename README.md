@@ -397,7 +397,7 @@ Result:
     }
 }
 ### Create Profile  
-URL: http://localhost:3600/api/profile/user1  
+URL: http://localhost:3600/api/profile
 Request Method: GET  
 Request Parameters: in Header you need add a **KEY** named Authorization, and its **VALUE** is Bearer (+the token you get from **User Authentication Result**), if the user you logged in already has profile,then you can't create and get a status 400. 
 example: 
@@ -434,7 +434,7 @@ Result:
     }
 }
 ### Update Profile  
-URL: http://localhost:3600/api/profile/user1  
+URL: http://localhost:3600/api/profile/user1  (***user1***)is the username  
 Request Method: GET  
 Request Parameters: in Header you need add a **KEY** named Authorization, and its **VALUE** is Bearer (+the token you get from **User Authentication Result**), you can only update the profile of the user that you logged in. 
 example: 
@@ -470,6 +470,30 @@ Result:
         "__v": 0
     }
 }
+
+
+### Get Interest 
+URL: http://localhost:3600/api/interest/user1  (***user1***)is the username    
+Request Method: GET  
+Request Parameters: in Header you need add a **KEY** named Authorization, and its **VALUE** is Bearer (+the token you get from **User Authentication Result**),   
+example: 
+
+KEY|VALUE
+---|---  
+Authorization|Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmJlMTUzZTE0YzAxNTYyMDk1MjE4YWMiLCJpYXQiOjE2NTY2MjU4OTgsImV4cCI6MTY1NjcxMjI5OH0.pT6wBPFD8SXZDwL4DTGoMbT2NENehX4IJOiCTov55Js  
+Result: get current logged in user interests  
+```
+{
+    "userInterest": {
+        "interest_List": [
+            "job"
+        ],
+        "is_International": null,
+        "need_Job": null
+    }
+}
+```
+
 ### Get Category  
 URL: http://localhost:3600/api/categories  
 Request Method: GET  

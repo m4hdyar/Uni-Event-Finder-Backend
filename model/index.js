@@ -1,4 +1,4 @@
-//用来把其他模块组织起来
+
 const mongoose = require('mongoose')
 const { dbUrl } = require("../config/config.default")
 
