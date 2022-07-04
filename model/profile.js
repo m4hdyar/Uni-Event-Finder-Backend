@@ -6,7 +6,7 @@ const ProfileSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref:"User",
         required: true},
-    email : {
+    username : {
         type: String,
         default : null
     },

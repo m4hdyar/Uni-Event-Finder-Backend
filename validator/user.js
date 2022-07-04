@@ -4,7 +4,7 @@ const {User} = require('../model')
 const md5 = require("../util/md5");
 
 exports.register = validate([
-    body("user.username")
+/*     body("user.username")
       .notEmpty().withMessage("Username cannot be empty")
       .custom(async (value) => {
 
@@ -12,7 +12,7 @@ exports.register = validate([
         if (user) {
           return Promise.reject("User already exists");
         }
-    }),
+    }), */
       
     body("user.password").notEmpty().withMessage("Password cannot be empty"),
     
@@ -41,8 +41,7 @@ exports.login = [
 
         const user = await User.findOne({ email }).select([
           "email",
-          "password",
-          "username"
+          "password"
         ]);
 
         if (!user) {

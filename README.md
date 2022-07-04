@@ -26,7 +26,6 @@ Request Parameters:
 ```
 {
     "user":{
-        "username":"user1",
         "email":"user1@user.user",
         "password":"123456"
     }
@@ -36,13 +35,7 @@ Result:
 ```
 {
     "user": {
-        "username": "user1",
         "email": "user1@user.user",
-        "is_International": null,
-        "need_Job": null,
-        "program": null,
-        "major": null,
-        "interest_List": [],
         "is_Admin": "0",
         "_id": "62be153e14c01562095218ac",
         "createdAt": "2022-06-30T21:27:26.424Z",
@@ -56,7 +49,6 @@ Request Parameters: you need to set is_Admin to 1, so that this account will hav
 ```
 {
     "user":{
-        "username":"admin",
         "email":"admin@admin.admin",
         "password":"123456",
         "is_Admin": "1"
@@ -67,7 +59,6 @@ Result:
 ```
 {  
     "_id": "62b71d71221ea387a4d97fae",
-    "username": "user1",
     "email": "user1@user.user"
 }
 ```
@@ -79,7 +70,6 @@ Request Parameters:
 ```
 {
     "user":{
-        "username":"user1",
         "email":"user1@user.user",
         "password":"123456"
     }
@@ -89,50 +79,10 @@ Result:  For token life time, it is 1 day, that means user need to login again a
 ```
 {
     "_id": "62be153e14c01562095218ac",
-    "username": "user1",
     "email": "user1@user.user",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmJlMTUzZTE0YzAxNTYyMDk1MjE4YWMiLCJpYXQiOjE2NTY2MjU4OTgsImV4cCI6MTY1NjcxMjI5OH0.pT6wBPFD8SXZDwL4DTGoMbT2NENehX4IJOiCTov55Js"
 }
 ```
-
-### Get Current User  
-URL: http://localhost:3600/api/user 
-Request Method: GET  
-Request Parameters: in Header you need add a **KEY** named Authorization, and its **VALUE** is Bearer (+the token you get from **User Authentication Result**),   
-example: 
-
-KEY|VALUE
----|---  
-Authorization|Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmJlMTUzZTE0YzAxNTYyMDk1MjE4YWMiLCJpYXQiOjE2NTY2MjU4OTgsImV4cCI6MTY1NjcxMjI5OH0.pT6wBPFD8SXZDwL4DTGoMbT2NENehX4IJOiCTov55Js  
-
-
-Result:  
-```
-{
-    "user": {
-        "_id": "62be153e14c01562095218ac",
-        "username": "user1",
-        "email": "user1@user.user",
-        "is_International": null,
-        "need_Job": null,
-        "program": null,
-        "major": null,
-        "interest_List": [],
-        "is_Admin": "0",
-        "createdAt": "2022-06-30T21:27:26.424Z",
-        "updatedAt": "2022-06-30T21:27:26.424Z",
-        "__v": 0
-    }
-}
-```
-
-
-### Update User  
-URL: http://localhost:3600/api/user  
-Request Method: PUT  
-Request Parameters: same as "**Get Current User**"  
-Result: put /User (this curd only has basic function)  
-
 
 ### Create Event  
 URL: http://localhost:3600/api/event  
@@ -364,25 +314,26 @@ URL: http://localhost:3600/api/event/62be1e49fd86eb39d04da902 (the ***/62be1e49f
 Request Method: DELETE  
 Request Parameters: same as "**Update Event**",    
 Result: status 204  
-```
 Result(failed):  And you will get a status 409
 ```
 Sorry, you are not admin
 ```
 
 ### Get Profile  
-URL: http://localhost:3600/api/profile/user1  
+URL: http://localhost:3600/api/profile/62be11e855a5fe5696afc76c(***62be11e855a5fe5696afc76c*** is user objectId that you logge in)    
 Request Method: GET  
 Request Parameters: in Header you need add a **KEY** named Authorization, and its **VALUE** is Bearer (+the token you get from **User Authentication Result**), you can only get the profile of the user that you logged in 
 example: 
 KEY|VALUE
 ---|---  
 Authorization|Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmJlMTFlODU1YTVmZTU2OTZhZmM3NmMiLCJpYXQiOjE2NTY4MDA3NDksImV4cCI6MTY1Njg4NzE0OX0.2zAI5q__n4aWiSS0o1mBoS_VTSTyb4nY1H61bBeUK20  
-Result:   
+
+Result:  
+``` 
 {
     "profile": {
-        "_id": "62c0b84f0b0a74b146da793b",
-        "email": "user1@user.user",
+        "_id": "62c2c788e49125b4be821211",
+        "username": "user1",
         "is_International": false,
         "need_Job": false,
         "program": "master",
@@ -391,22 +342,24 @@ Result:
             "job"
         ],
         "user": "62be11e855a5fe5696afc76c",
-        "createdAt": "2022-07-02T21:27:43.941Z",
-        "updatedAt": "2022-07-02T21:27:43.941Z",
+        "createdAt": "2022-07-04T10:57:12.649Z",
+        "updatedAt": "2022-07-04T11:08:01.006Z",
         "__v": 0
     }
 }
+```
 ### Create Profile  
 URL: http://localhost:3600/api/profile
 Request Method: GET  
-Request Parameters: in Header you need add a **KEY** named Authorization, and its **VALUE** is Bearer (+the token you get from **User Authentication Result**), if the user you logged in already has profile,then you can't create and get a status 400. 
+Request Parameters: in Header you need add a **KEY** named Authorization, and its **VALUE** is Bearer (+the token you get from **User Authentication Result**), if the user you logged in already has profile,then you can't create and get a status 400.   
+
 example: 
 KEY|VALUE
 ---|---  
 Authorization|Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmJlMTFlODU1YTVmZTU2OTZhZmM3NmMiLCJpYXQiOjE2NTY4MDA3NDksImV4cCI6MTY1Njg4NzE0OX0.2zAI5q__n4aWiSS0o1mBoS_VTSTyb4nY1H61bBeUK20    
 ```
 {
-    "profile":{"email" :"user1@user.user", 
+    "profile":{"username" :"user1", 
     "is_International": "false",
     "need_Job" : "false",
     "program" : "master",
@@ -415,11 +368,12 @@ Authorization|Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmJlMT
 }
 }
 ```
-Result:   
+Result: 
+```  
 {
     "profile": {
         "_id": "62c0b84f0b0a74b146da793b",
-        "email": "user1@user.user",
+        "username": "user1",
         "is_International": false,
         "need_Job": false,
         "program": "master",
@@ -433,8 +387,9 @@ Result:
         "__v": 0
     }
 }
+```
 ### Update Profile  
-URL: http://localhost:3600/api/profile/user1  (***user1***)is the username  
+URL: http://localhost:3600/api/profile/62be11e855a5fe5696afc76c(***62be11e855a5fe5696afc76c*** is user objectId that you logge in)    
 Request Method: GET  
 Request Parameters: in Header you need add a **KEY** named Authorization, and its **VALUE** is Bearer (+the token you get from **User Authentication Result**), you can only update the profile of the user that you logged in. 
 example: 
@@ -443,7 +398,7 @@ KEY|VALUE
 Authorization|Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmJlMTFlODU1YTVmZTU2OTZhZmM3NmMiLCJpYXQiOjE2NTY4MDA3NDksImV4cCI6MTY1Njg4NzE0OX0.2zAI5q__n4aWiSS0o1mBoS_VTSTyb4nY1H61bBeUK20    
 ```
 {
-    "profile":{"email" :"user1@user.user", 
+    "profile":{
     "is_International": "false",
     "need_Job" : "false",
     "program" : "master",
@@ -452,11 +407,11 @@ Authorization|Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmJlMT
 }
 }
 ```
-Result:   
+Result:  
+``` 
 {
     "profile": {
         "_id": "62c0b84f0b0a74b146da793b",
-        "email": "user1@user.user",
         "is_International": false,
         "need_Job": false,
         "program": "master",
@@ -470,10 +425,10 @@ Result:
         "__v": 0
     }
 }
-
+```
 
 ### Get Interest 
-URL: http://localhost:3600/api/interest/user1  (***user1***)is the username    
+URL: URL: http://localhost:3600/api/profile/62be11e855a5fe5696afc76c(***62be11e855a5fe5696afc76c*** is user objectId that you logge in)      
 Request Method: GET  
 Request Parameters: in Header you need add a **KEY** named Authorization, and its **VALUE** is Bearer (+the token you get from **User Authentication Result**),   
 example: 
@@ -481,7 +436,9 @@ example:
 KEY|VALUE
 ---|---  
 Authorization|Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmJlMTUzZTE0YzAxNTYyMDk1MjE4YWMiLCJpYXQiOjE2NTY2MjU4OTgsImV4cCI6MTY1NjcxMjI5OH0.pT6wBPFD8SXZDwL4DTGoMbT2NENehX4IJOiCTov55Js  
-Result: get current logged in user interests  
+
+Result: get current logged-in user interests  
+
 ```
 {
     "userInterest": {
@@ -493,9 +450,3 @@ Result: get current logged in user interests
     }
 }
 ```
-
-### Get Category  
-URL: http://localhost:3600/api/categories  
-Request Method: GET  
-Request Parameters: null  
-Result: get /Category (this curd only has basic function)  

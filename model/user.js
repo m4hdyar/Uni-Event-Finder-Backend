@@ -4,7 +4,7 @@ const md5 = require("../util/md5");
 const UserSchema = new mongoose.Schema({
     username : { 
         type: String,
-        require : true},
+        require : null},
     password : {
         type: String,
         require : true,
@@ -15,26 +15,6 @@ const UserSchema = new mongoose.Schema({
     email : {
         type: String,
         require : true
-    },
-    is_International : {
-        type: Boolean,
-        default : null
-    },
-    need_Job : {
-        type: Boolean,
-        default : null
-    },
-    program : {
-        type: String,
-        default : null
-    },
-    major : {
-        type: String,
-        default : null
-    },
-    interest_List: {
-        type: [String],
-        default: null,
     },
     is_Admin : {
         type: String,

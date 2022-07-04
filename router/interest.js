@@ -6,9 +6,6 @@ const auth = require("../middleware/auth");
 const router = express.Router();
 
 // Get interest 
-router.get("/:username", auth, interestValidator.validateUser,interestCtrl.getInterest);
-//router.get("/:username", auth,interestCtrl.getInterest);
-//router.get("/:username",interestCtrl.getInterest);
-
+router.get("/:userId", auth, interestValidator.validateUser,interestCtrl.getInterest);
 
 module.exports = router;

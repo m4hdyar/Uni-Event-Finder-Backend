@@ -2,10 +2,12 @@ const { body } = require("express-validator");
 const validate = require("../middleware/validate");
 const { Profile, User } = require('../model')
 
-exports.profileExist =[// validate if profile exist
+exports.profileExist =[
+  validate([validate.isValidObjectId(["params"], "userId"),]),
+  // validate if profile exist
 async (req, res, next) => {
-    const expectUser = await User.findOne({username:req.params.username});
-    const expectProfile = await Profile.findOne({user:expectUser._id});     
+    const userId = req.params.userId;
+    const expectProfile = await Profile.findOne({user:userId});     
     req.profile = expectProfile;
   if (!expectProfile) {
     return res.status(404).end();

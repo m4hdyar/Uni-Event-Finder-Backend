@@ -45,7 +45,7 @@ exports.login = async (req, res, next) => {
     }
 };
   
- // Get Current User 
+/*  // Get Current User 
 exports.getCurrentUser = async (req, res, next) => {
   try {
     // handle the request
@@ -56,8 +56,8 @@ exports.getCurrentUser = async (req, res, next) => {
     next(err);
   }
 }; 
-
- // Update User 
+ */
+/*  // Update User 
 exports.updateUser = async (req, res, next) => {
   try {
       // handle the request
@@ -65,6 +65,6 @@ exports.updateUser = async (req, res, next) => {
   } catch (err) {
       next(err);
   }
-}; 
+};  */
 
   

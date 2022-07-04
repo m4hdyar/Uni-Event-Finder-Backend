@@ -12,9 +12,6 @@ router.use("/profile", require("./profile"));
 // event related routing
 router.use("/event",require("./event"));
 
-// category related routing
-router.use(require("./category"));
-
 // interest related routing
 router.use("/interest",require("./interest"));
 

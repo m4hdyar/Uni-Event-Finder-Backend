@@ -36,7 +36,7 @@ exports.updateProfile = async (req, res, next) => {
   try {
     const profile = await Profile.findOne({user:req.user._id});
     const bodyProfile = req.body.profile;
-    profile.email = bodyProfile.email || profile.email;
+    profile.username = bodyProfile.username || profile.username;
     profile.is_International = bodyProfile.is_International || profile.is_International;
     profile.need_Job = bodyProfile.need_Job || profile.need_Job;
     profile.program = bodyProfile.program || profile.program;
