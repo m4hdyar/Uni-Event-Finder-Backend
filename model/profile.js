@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;//Associate the profile with the user, using mongoose's populate
+const Schema = mongoose.Schema;//Associate the profile with the user
 
 const ProfileSchema = new mongoose.Schema({
     user : { 

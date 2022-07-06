@@ -19,7 +19,7 @@ async (req, res, next) => {
 exports.validateUser = [  
     //determine if the profie belong to the current logged in user
     async (req, res, next) => {
-      //console.log(typeof(req.user._id), typeof(req.profile.user));// object object
+      
       if (req.user._id.toString() !== req.profile.user.toString()) {
         return res.status(403).end();
       }

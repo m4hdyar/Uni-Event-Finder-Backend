@@ -22,7 +22,7 @@ module.exports = async (req, res, next) => {
   } catch (err) {
     return res.status(401).end();
   }
-  //If valid, read the user information, mount it on the req request object, and continue with the rest of the execution
+
 };
 
 

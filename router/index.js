@@ -6,13 +6,13 @@ const router = express.Router();
 router.use(require("./user"));
 //router.use(require("./admin"));
 
-//profile related routing
+//Profile related routing
 router.use("/profile", require("./profile"));
 
-// event related routing
+//Event related routing
 router.use("/event",require("./event"));
 
-// interest related routing
+//Interest related routing
 router.use("/interest",require("./interest"));
 
 module.exports = router;

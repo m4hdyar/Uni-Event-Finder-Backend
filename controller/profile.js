@@ -3,7 +3,6 @@ const { Profile } = require("../model");
 // Create Profile 
 exports.createProfile = async (req, res, next) => {
   try {
-    // handle the request
     const profile = new Profile(req.body.profile); 
     profile.user = req.user._id;
 
@@ -19,7 +18,6 @@ exports.createProfile = async (req, res, next) => {
  //Get Profile 
 exports.getProfile = async (req, res, next) => {
   try {
-    // handle the request
     const profile = await Profile.findOne({user:req.user._id});
     if (!profile) {
       return res.status(404).end();

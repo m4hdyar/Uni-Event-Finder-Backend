@@ -3,17 +3,7 @@ const validate = require("../middleware/validate");
 const {User} = require('../model')
 const md5 = require("../util/md5");
 
-exports.register = validate([
-/*     body("user.username")
-      .notEmpty().withMessage("Username cannot be empty")
-      .custom(async (value) => {
-
-        const user = await User.findOne({ username: value });
-        if (user) {
-          return Promise.reject("User already exists");
-        }
-    }), */
-      
+exports.register = validate([     
     body("user.password").notEmpty().withMessage("Password cannot be empty"),
     
     body("user.email")
@@ -47,7 +37,7 @@ exports.login = [
         if (!user) {
           return Promise.reject("User does not exist");
         }
-        // Mount the data into the request object, so that subsequent middleware can also be used directly, eliminating the need for repeated queries
+        // Mount the data into the request object
         req.user = user;
       }),
     ]),

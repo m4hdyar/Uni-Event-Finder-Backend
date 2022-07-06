@@ -16,8 +16,10 @@ module.exports = async (req, res, next) => {
   try {
     //Verify that the token is valid
     const decodedToken = await verify(token, jwtSecret);
+
     // Mount the admin information to the request object
     req.user = await User.findById(decodedToken.userId);
+    
     if(req.user.is_Admin == "0"){
       return res.status(409).send('Sorry, you are not admin')
     }else if(req.user.is_Admin == "1"){

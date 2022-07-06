@@ -17,7 +17,7 @@ exports.createEvent = validate([
 
     validate([validate.isValidObjectId(["params"], "eventId"),]),
   
-  // Verify that the article exists
+  // Verify that the event exists
     async (req, res, next) => {
       const eventId = req.params.eventId;
       const event = await Event.findById(eventId);

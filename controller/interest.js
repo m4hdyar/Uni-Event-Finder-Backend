@@ -2,7 +2,6 @@ const { Profile } = require("../model");
 // Get Interest 
 exports.getInterest = async (req, res, next) => {
     try {
-      // handle the request
       const userInterest = {};
       const profile = await Profile.findOne({user:req.user._id});
       

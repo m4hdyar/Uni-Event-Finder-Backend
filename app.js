@@ -15,7 +15,7 @@ app.use(cors())
 
 const PORT = process.env.PORT || 3600;
 
-///mount routes, all routes are prefixed with api
+///Mount routes, all routes are prefixed with api
 app.use('/api', router)
 // Mounted unified server-side error handling middleware
 app.use(errorHandler());

@@ -39,7 +39,6 @@ exports.listEvents = async (req, res, next) => {
 //Get Event
 exports.getEvent = async (req, res, next) => {
   try {
-    // handle the request
     const event = await Event.findById(req.params.eventId);
     if (!event) {
       return res.status(404).end();
@@ -52,10 +51,9 @@ exports.getEvent = async (req, res, next) => {
   }
 };
 
-//create Event
+//Create Event
 exports.createEvent = async (req, res, next) => {
   try {
-    // handle the request
     const event = new Event(req.body.event); 
     await event.save();
     res.status(201).json({
@@ -66,20 +64,20 @@ exports.createEvent = async (req, res, next) => {
   }
 };
 
-//update Event
+//Update Event
 exports.updateEvent = async (req, res, next) => {
   try {
     const event = req.event;
     const bodyEvent = req.body.event;
-    event.title = bodyEvent.title || event.title;
-    event.description = bodyEvent.description || event.description;
-    event.start_Date = bodyEvent.start_Date || event.start_Date;
-    event.end_Date = bodyEvent.end_Date || event.end_Date;
-    event.category = bodyEvent.category || event.category;
-    event.is_International = bodyEvent.is_International || event.is_International;
-    event.is_Job_Event = bodyEvent.is_Job_Event || event.is_Job_Event;
-    event.is_Very_Important = bodyEvent.is_Very_Important || event.is_Very_Important;
-    event.cost = bodyEvent.cost || event.cost;
+    event.title = bodyEvent.title || bodyEvent.title;
+    event.description = bodyEvent.description || bodyEvent.description;
+    event.start_Date = bodyEvent.start_Date || bodyEvent.start_Date;
+    event.end_Date = bodyEvent.end_Date || bodyEvent.end_Date;
+    event.category = bodyEvent.category || bodyEvent.category;
+    event.is_International = bodyEvent.is_International || bodyEvent.is_International;
+    event.is_Job_Event = bodyEvent.is_Job_Event || bodyEvent.is_Job_Event;
+    event.is_Very_Important = bodyEvent.is_Very_Important || bodyEvent.is_Very_Important;
+    event.cost = bodyEvent.cost || bodyEvent.cost;
     await event.save();
     res.status(200).json({
       event,
@@ -89,10 +87,9 @@ exports.updateEvent = async (req, res, next) => {
   }
 };
 
-//delete Article
+//Delete Article
 exports.deleteEvent = async (req, res, next) => {
   try {
-    // handle the request
     const event = req.event;
     await event.remove();
     res.status(204).end();
