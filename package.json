@@ -16,9 +16,7 @@
     "mongodb": "^4.7.0",
     "mongoose": "^6.4.0",
     "morgan": "~1.9.1",
-    "nodemon": "^2.0.18",
+    "nodemon": "^2.0.19",
     "pug": "2.0.0-beta11"
   }
 }
-
-
