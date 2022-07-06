@@ -11,7 +11,11 @@ exports.listEvents = async (req, res, next) => {
     const filter = {};
     // As long as it contains a category, it can be queried
     if (category) {
-      filter.category = category;
+    // As long as it contains one of input categories, it can be queried  
+      const categoryArr = category.split(",");
+      const newCategory = categoryArr.join("|")
+      let regCategory = new RegExp(newCategory);
+      filter.category = regCategory;
     }
     if (is_International){
       filter.is_International = is_International;
