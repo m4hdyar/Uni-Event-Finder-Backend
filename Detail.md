@@ -1,13 +1,20 @@
 # Uni-Event-Finder Backend
-## Endpoints  
-### Authentication Header:  
-You can read the authentication header from the headers of the request  `Authorization: Bearer jwt.token.here`  
 
+## Introduction
 
+For convenience, we use a Postman collection to test our API endpointd as we build our project, and VS code as editor.
 
-#### Authentication:  
+## Endpoints
+
+### Authentication Header:
+
+You can read the authentication header from the headers of the request `Authorization: Bearer jwt.token.here`
+
+#### Authentication:
+
 `POST /api/users/login`  
-Example request body:  
+Example request body:
+
 ```dotnetcli
 {
     "user":{
@@ -16,14 +23,15 @@ Example request body:
     }
 }
 ```
-No authentication required, returns a User.   
-Required fields:`email` , `password`  
 
+No authentication required, returns a User.  
+Required fields:`email` , `password`
 
+#### Registration:
 
-#### Registration:   
 `POST /api/users`  
-Example request body:  
+Example request body:
+
 ```dotnetcli
 {
     "user":{
@@ -32,25 +40,25 @@ Example request body:
     }
 }
 ```
+
 No authentication required, returns a User.
 Set `"isAdmin": true` to authorize if the user has access to operate events.  
-Required fields:`email` , `password`   
+Required fields:`email` , `password`
 
+#### Get Profile
 
-
-#### Get Profile  
 `GET /api/profile/:userId`  
-Authentication required, return a Profile.  
+Authentication required, return a Profile.
 
+#### Create Profile
 
-
-#### Create Profile  
 `POST /api/profile`  
-Authentication required, return a Profile.   
-Example request body:  
+Authentication required, return a Profile.  
+Example request body:
+
 ```dotnetcli
 {
-    "Profile":{"username" :"user1", 
+    "Profile":{"username" :"user1",
     "is_International": "false",
     "need_Job" : "false",
     "program" : "master",
@@ -59,16 +67,17 @@ Example request body:
 }
 }
 ```
+
 Authentication required, will return an Profile.
 Required fields: null  
-Optional fields: `username`, `is_International`, `need_Job`, `program`, `major`; `interest_List` as an array of Strings 
+Optional fields: `username`, `is_International`, `need_Job`, `program`, `major`; `interest_List` as an array of Strings
 
+#### Update Profile
 
-
-#### Update Profile  
 `PUT /api/profile/:userId`  
-Authentication required, return a Profile.   
-Example request body:  
+Authentication required, return a Profile.  
+Example request body:
+
 ```dotnetcli
 {
     "Profile":{
@@ -76,37 +85,36 @@ Example request body:
 }
 }
 ```
+
 Authentication required, will return the updated Profile.
 Required fields: null  
-Optional fields: `username`, `is_International`, `need_Job`, `program`, `major`; `interest_List` as an array of Strings.  
-
+Optional fields: `username`, `is_International`, `need_Job`, `program`, `major`; `interest_List` as an array of Strings.
 
 #### List Events
+
 `GET /api/event`  
 Returns most recent events globally by default, provide category, is_International, is_Job_Event or is_Very_Important query parameter to filter results  
-Query Parameters:  
-1. Filter by tag:`?category=job,test,music`  
-2. Filter by is_International:`  
-?is_International=true`  
-3. Filter by is_Job_Event:`  
-?is_Job_Event=true`  
-4. Filter by is_Very_Important:`?is_Very_Important=true`  
-5.  Limit number of events (default is 5):`?limit=5`  
-   
+Query Parameters:
+
+1. Filter by tag:`?category=job,test,music`
+2. Filter by is_International:` ?is_International=true`
+3. Filter by is_Job_Event:` ?is_Job_Event=true`
+4. Filter by is_Very_Important:`?is_Very_Important=true`
+5. Limit number of events (default is 5):`?limit=5`
+
 Authentication optional, will return multiple events
 
+#### Get Event
 
-
-#### Get Event  
 `GET /api/event/:eventId`  
-Authentication optional, return a Event.  
+Authentication optional, return a Event.
 
+#### Create Event
 
-
-#### Create Event  
 `POST /api/Event`  
-Authentication required, return a Event.   
-Example request body:  
+Authentication required, return a Event.  
+Example request body:
+
 ```dotnetcli
 {
     "event":{
@@ -118,16 +126,17 @@ Example request body:
     }
 }
 ```
+
 Authentication required (admin account), will return an Event.
-Required fields: `title`, `description`, `start_Date`, `end_Date`;     
-Optional fields: `is_International`, `is_Job_Event`, `is_Very_Important`,  `cost`;  
+Required fields: `title`, `description`, `start_Date`, `end_Date`;  
+Optional fields: `is_International`, `is_Job_Event`, `is_Very_Important`, `cost`;
 
+#### Update Event
 
-
-#### Update Event  
 `PUT /api/Event/:eventId`  
-Authentication required (admin account), return a Event.   
-Example request body:  
+Authentication required (admin account), return a Event.  
+Example request body:
+
 ```dotnetcli
 {
     "Event":{
@@ -135,31 +144,29 @@ Example request body:
 }
 }
 ```
+
 Authentication required, will return the updated Event.
 Required fields: null  
-Optional fields:  `title`, `description`, `start_Date`, `end_Date`,  `is_International`, `is_Job_Event`, `is_Very_Important`,  `cost`  
+Optional fields: `title`, `description`, `start_Date`, `end_Date`, `is_International`, `is_Job_Event`, `is_Very_Important`, `cost`
 
+#### Delete Event
 
-
-#### Delete Event  
 `DELETE /api/Event/:eventId`  
-Authentication required (admin account).  
+Authentication required (admin account).
 
+#### Get Interest
 
-
-
-#### Get Interest  
 `GET /api/interest/:userId`  
 Authentication required, return a current user interest.
 
-
 ## API Response format
-### JSON Objects returned by API:  
-Make sure the right content type like Content-Type: application/json; charset=utf-8 is correctly returned.  
 
+### JSON Objects returned by API:
 
+Make sure the right content type like Content-Type: application/json; charset=utf-8 is correctly returned.
 
-#### Users (for Authentication)  
+#### Users (for Authentication)
+
 ```dotnetcli
 {
     "_id": "62be06b6ae8c05113c749ee2",
@@ -168,10 +175,8 @@ Make sure the right content type like Content-Type: application/json; charset=ut
 }
 ```
 
+#### Users (for Registration)
 
-
-
-#### Users (for Registration)  
 ```dotnetcli
 {
     "user": {
@@ -185,10 +190,8 @@ Make sure the right content type like Content-Type: application/json; charset=ut
 }
 ```
 
-
-
-
 #### Profile
+
 ```dotnetcli
 {
     "profile": {
@@ -209,9 +212,8 @@ Make sure the right content type like Content-Type: application/json; charset=ut
 }
 ```
 
-
-
 #### Single Event
+
 ```dotnetcli
 {
     "event": {
@@ -231,7 +233,9 @@ Make sure the right content type like Content-Type: application/json; charset=ut
     }
 }
 ```
+
 #### Multiple Events
+
 ```dotnetcli
 {
     "events": [
@@ -269,7 +273,9 @@ Make sure the right content type like Content-Type: application/json; charset=ut
     "eventsCont": 2
 }
 ```
+
 #### User Interest
+
 ```dotnetcli
 {
     "userInterest": {
@@ -281,25 +287,28 @@ Make sure the right content type like Content-Type: application/json; charset=ut
     }
 }
 ```
-## Error Handling  
+
+## Error Handling
+
 ### Errors and Status Codes
+
 If a request fails any validations, expect a 400 and errors in the following format:
 
 {
-    "errors": [
-        {
-            "value": "",
-            "msg": "Event title can't be empty",
-            "param": "event.title",
-            "location": "body"
-        }
-    ]
+"errors": [
+{
+"value": "",
+"msg": "Event title can't be empty",
+"param": "event.title",
+"location": "body"
+}
+]
 }
 
-#### Other status codes:  
+#### Other status codes:
+
 401 for Unauthorized requests, when a request requires authentication but it isn't provided
 
 403 for Forbidden requests, when a request may be valid but the user doesn't have permissions to perform the action
 
 404 for Not found requests, when a resource can't be found to fulfill the request
-
