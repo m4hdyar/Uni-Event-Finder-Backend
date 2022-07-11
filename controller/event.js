@@ -26,7 +26,7 @@ exports.listEvents = async (req, res, next) => {
       filter.is_Very_Important = is_Very_Important
     }
     if (!limit) {
-      filter.limit = 10
+      filter.limit = 100
     } else { filter.limit = limit }
     //console.log(filter.limit)
     //console.log(req.query)
