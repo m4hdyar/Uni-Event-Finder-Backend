@@ -2,7 +2,7 @@
 
 ## Introduction
 
-For convenience, we use a Postman collection to test our API endpointd as we build our project, and VS code as editor.
+For convenience, we use a Postman collection to test our API endpoints as we build our project, and VS code as editor.
 
 ## Endpoints
 
@@ -15,7 +15,7 @@ You can read the authentication header from the headers of the request `Authoriz
 `POST /api/users/login`  
 Example request body:
 
-```dotnetcli
+```json
 {
     "user":{
         "email":"user1@user.user",
@@ -32,7 +32,7 @@ Required fields:`email` , `password`
 `POST /api/users`  
 Example request body:
 
-```dotnetcli
+```json
 {
     "user":{
         "email":"user1@user.user",
@@ -56,15 +56,16 @@ Authentication required, return a Profile.
 Authentication required, return a Profile.  
 Example request body:
 
-```dotnetcli
+```json
 {
-    "Profile":{"username" :"user1",
-    "is_International": "false",
-    "need_Job" : "false",
-    "program" : "master",
-    "major" : "comunication engineering",
-    "interest_List": ["job"]
-}
+    "Profile":{
+        "username" :"user1",
+        "is_International": "false",
+        "need_Job" : "false",
+        "program" : "master",
+        "major" : "comunication engineering", 
+        "interest_List": ["job"]   
+    }
 }
 ```
 
@@ -78,11 +79,11 @@ Optional fields: `username`, `is_International`, `need_Job`, `program`, `major`;
 Authentication required, return a Profile.  
 Example request body:
 
-```dotnetcli
+```json
 {
     "Profile":{
-    "is_International": "true"
-}
+        "is_International": "true"
+    }
 }
 ```
 
@@ -115,7 +116,7 @@ Authentication optional, return a Event.
 Authentication required, return a Event.  
 Example request body:
 
-```dotnetcli
+```json
 {
     "event":{
         "title":"event3",
@@ -137,11 +138,11 @@ Optional fields: `is_International`, `is_Job_Event`, `is_Very_Important`, `cost`
 Authentication required (admin account), return a Event.  
 Example request body:
 
-```dotnetcli
+```json
 {
     "Event":{
-    "is_International": "true"
-}
+        "is_International": "true"
+    }
 }
 ```
 
@@ -167,7 +168,7 @@ Make sure the right content type like Content-Type: application/json; charset=ut
 
 #### Users (for Authentication)
 
-```dotnetcli
+```json
 {
     "_id": "62be06b6ae8c05113c749ee2",
     "email": "user1@user.user",
@@ -177,7 +178,7 @@ Make sure the right content type like Content-Type: application/json; charset=ut
 
 #### Users (for Registration)
 
-```dotnetcli
+```json
 {
     "user": {
         "email": "user1@user.user",
@@ -192,7 +193,7 @@ Make sure the right content type like Content-Type: application/json; charset=ut
 
 #### Profile
 
-```dotnetcli
+```json
 {
     "profile": {
         "_id": "62c5d6a952a3fd47af7be339",
@@ -214,7 +215,7 @@ Make sure the right content type like Content-Type: application/json; charset=ut
 
 #### Single Event
 
-```dotnetcli
+```json
 {
     "event": {
         "_id": "62be1e49fd86eb39d04da902",
@@ -236,7 +237,7 @@ Make sure the right content type like Content-Type: application/json; charset=ut
 
 #### Multiple Events
 
-```dotnetcli
+```json
 {
     "events": [
         {
@@ -276,7 +277,7 @@ Make sure the right content type like Content-Type: application/json; charset=ut
 
 #### User Interest
 
-```dotnetcli
+```json
 {
     "userInterest": {
         "interest_List": [
@@ -294,21 +295,23 @@ Make sure the right content type like Content-Type: application/json; charset=ut
 
 If a request fails any validations, expect a 400 and errors in the following format:
 
+```json
 {
 "errors": [
-{
-"value": "",
-"msg": "Event title can't be empty",
-"param": "event.title",
-"location": "body"
-}
+    {       
+        "value": "", 
+        "msg": "Event title can't be empty",
+        "param": "event.title",
+        "location": "body"
+    }
 ]
 }
+```
 
 #### Other status codes:
 
-401 for Unauthorized requests, when a request requires authentication but it isn't provided
+**401** for Unauthorized requests, when a request requires authentication but it isn't provided
 
-403 for Forbidden requests, when a request may be valid but the user doesn't have permissions to perform the action
+**403** for Forbidden requests, when a request may be valid but the user doesn't have permissions to perform the action
 
-404 for Not found requests, when a resource can't be found to fulfill the request
+**404** for Not found requests, when a resource can't be found to fulfill the request

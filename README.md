@@ -12,7 +12,7 @@ Run the command `nodemon app.js` to start the server, and navigate to `http://lo
 
 ## Features
 
-1.User registeration and Authentication;
+1.User registration and Authentication;
 
 2.User can view, create and update its own profile;
 

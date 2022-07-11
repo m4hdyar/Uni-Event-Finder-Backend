@@ -26,7 +26,7 @@ exports.login = async (req, res, next) => {
       const token = await jwt.sign(
         {userId: user._id},
         jwtSecret,
-        { expiresIn: 60 * 60 * 24 }//lifetime for token is 1 hour
+        { expiresIn: 60 * 60 * 24 }//lifetime for token is 1 day
         );
       //Removes the password attribute before sending a successful response
       delete user.password;
