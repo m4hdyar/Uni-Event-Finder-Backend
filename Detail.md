@@ -17,10 +17,10 @@ Example request body:
 
 ```json
 {
-    "user":{
-        "email":"user1@user.user",
-        "password":"123456"
-    }
+  "user": {
+    "email": "user1@user.user",
+    "password": "123456"
+  }
 }
 ```
 
@@ -34,10 +34,10 @@ Example request body:
 
 ```json
 {
-    "user":{
-        "email":"user1@user.user",
-        "password":"123456"
-    }
+  "user": {
+    "email": "user1@user.user",
+    "password": "123456"
+  }
 }
 ```
 
@@ -58,14 +58,14 @@ Example request body:
 
 ```json
 {
-    "Profile":{
-        "username" :"user1",
-        "is_International": "false",
-        "need_Job" : "false",
-        "program" : "master",
-        "major" : "comunication engineering", 
-        "interest_List": ["job"]   
-    }
+  "Profile": {
+    "username": "user1",
+    "is_International": "false",
+    "need_Job": "false",
+    "program": "master",
+    "major": "comunication engineering",
+    "interest_List": ["job"]
+  }
 }
 ```
 
@@ -81,9 +81,9 @@ Example request body:
 
 ```json
 {
-    "Profile":{
-        "is_International": "true"
-    }
+  "Profile": {
+    "is_International": "true"
+  }
 }
 ```
 
@@ -96,12 +96,14 @@ Optional fields: `username`, `is_International`, `need_Job`, `program`, `major`;
 `GET /api/event`  
 Returns most recent events globally by default, provide category, is_International, is_Job_Event or is_Very_Important query parameter to filter results  
 Query Parameters:
+Please pay attention to capitalization!
 
 1. Filter by tag:`?category=job,test,music`
 2. Filter by is_International:` ?is_International=true`
 3. Filter by is_Job_Event:` ?is_Job_Event=true`
 4. Filter by is_Very_Important:`?is_Very_Important=true`
-5. Limit number of events (default is 5):`?limit=5`
+5. Limit number of events:`?limit=5`
+6. Choose filter method:`?filterMethod=or`
 
 Authentication optional, will return multiple events
 
@@ -118,13 +120,13 @@ Example request body:
 
 ```json
 {
-    "event":{
-        "title":"event3",
-        "description":"I'm admin.",
-        "start_Date":"2022-06-30",
-        "end_Date":"2022-06-30",
-        "category":"test"
-    }
+  "event": {
+    "title": "event3",
+    "description": "I'm admin.",
+    "start_Date": "2022-06-30",
+    "end_Date": "2022-06-30",
+    "category": "test"
+  }
 }
 ```
 
@@ -140,9 +142,9 @@ Example request body:
 
 ```json
 {
-    "Event":{
-        "is_International": "true"
-    }
+  "Event": {
+    "is_International": "true"
+  }
 }
 ```
 
@@ -170,9 +172,9 @@ Make sure the right content type like Content-Type: application/json; charset=ut
 
 ```json
 {
-    "_id": "62be06b6ae8c05113c749ee2",
-    "email": "user1@user.user",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmJlMDZiNmFlOGMwNTExM2M3NDllZTIiLCJpYXQiOjE2NTcxMzI2OTUsImV4cCI6MTY1NzIxOTA5NX0.HQ4e6QXKj4Jc7TPg-C1uPwkszrE7zb16Hf8EplYNa88"
+  "_id": "62be06b6ae8c05113c749ee2",
+  "email": "user1@user.user",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmJlMDZiNmFlOGMwNTExM2M3NDllZTIiLCJpYXQiOjE2NTcxMzI2OTUsImV4cCI6MTY1NzIxOTA5NX0.HQ4e6QXKj4Jc7TPg-C1uPwkszrE7zb16Hf8EplYNa88"
 }
 ```
 
@@ -180,14 +182,14 @@ Make sure the right content type like Content-Type: application/json; charset=ut
 
 ```json
 {
-    "user": {
-        "email": "user1@user.user",
-        "is_Admin": "0",
-        "_id": "62c57fd11cf752bc5c062189",
-        "createdAt": "2022-07-06T12:28:01.272Z",
-        "updatedAt": "2022-07-06T12:28:01.272Z",
-        "__v": 0
-    }
+  "user": {
+    "email": "user1@user.user",
+    "is_Admin": "0",
+    "_id": "62c57fd11cf752bc5c062189",
+    "createdAt": "2022-07-06T12:28:01.272Z",
+    "updatedAt": "2022-07-06T12:28:01.272Z",
+    "__v": 0
+  }
 }
 ```
 
@@ -195,21 +197,19 @@ Make sure the right content type like Content-Type: application/json; charset=ut
 
 ```json
 {
-    "profile": {
-        "_id": "62c5d6a952a3fd47af7be339",
-        "username": "user1",
-        "is_International": false,
-        "need_Job": false,
-        "program": "master",
-        "major": "comunication engineering",
-        "interest_List": [
-            "job"
-        ],
-        "user": "62be06b6ae8c05113c749ee2",
-        "createdAt": "2022-07-06T18:38:33.094Z",
-        "updatedAt": "2022-07-06T18:38:33.094Z",
-        "__v": 0
-    }
+  "profile": {
+    "_id": "62c5d6a952a3fd47af7be339",
+    "username": "user1",
+    "is_International": false,
+    "need_Job": false,
+    "program": "master",
+    "major": "comunication engineering",
+    "interest_List": ["job"],
+    "user": "62be06b6ae8c05113c749ee2",
+    "createdAt": "2022-07-06T18:38:33.094Z",
+    "updatedAt": "2022-07-06T18:38:33.094Z",
+    "__v": 0
+  }
 }
 ```
 
@@ -217,21 +217,21 @@ Make sure the right content type like Content-Type: application/json; charset=ut
 
 ```json
 {
-    "event": {
-        "_id": "62be1e49fd86eb39d04da902",
-        "title": "event1",
-        "description": "I'm admin.",
-        "start_Date": "2022-06-30T00:00:00.000Z",
-        "end_Date": "2022-06-30T00:00:00.000Z",
-        "category": "job",
-        "is_International": true,
-        "is_Job_Event": true,
-        "is_Very_Important": false,
-        "cost": 15,
-        "createdAt": "2022-06-30T22:06:01.757Z",
-        "updatedAt": "2022-06-30T22:06:01.757Z",
-        "__v": 0
-    }
+  "event": {
+    "_id": "62be1e49fd86eb39d04da902",
+    "title": "event1",
+    "description": "I'm admin.",
+    "start_Date": "2022-06-30T00:00:00.000Z",
+    "end_Date": "2022-06-30T00:00:00.000Z",
+    "category": "job",
+    "is_International": true,
+    "is_Job_Event": true,
+    "is_Very_Important": false,
+    "cost": 15,
+    "createdAt": "2022-06-30T22:06:01.757Z",
+    "updatedAt": "2022-06-30T22:06:01.757Z",
+    "__v": 0
+  }
 }
 ```
 
@@ -239,39 +239,39 @@ Make sure the right content type like Content-Type: application/json; charset=ut
 
 ```json
 {
-    "events": [
-        {
-            "_id": "62be1e49fd86eb39d04da902",
-            "title": "event1",
-            "description": "I'm admin.",
-            "start_Date": "2022-06-30T00:00:00.000Z",
-            "end_Date": "2022-06-30T00:00:00.000Z",
-            "category": "job",
-            "is_International": null,
-            "is_Job_Event": null,
-            "is_Very_Important": null,
-            "cost": null,
-            "createdAt": "2022-06-30T22:06:01.757Z",
-            "updatedAt": "2022-06-30T22:06:01.757Z",
-            "__v": 0
-        },
-        {
-            "_id": "62be1ea7fd86eb39d04da905",
-            "title": "event2",
-            "description": "I'm admin.",
-            "start_Date": "2022-06-30T00:00:00.000Z",
-            "end_Date": "2022-06-30T00:00:00.000Z",
-            "category": "job",
-            "is_International": null,
-            "is_Job_Event": null,
-            "is_Very_Important": null,
-            "cost": null,
-            "createdAt": "2022-06-30T22:07:35.580Z",
-            "updatedAt": "2022-06-30T22:07:35.580Z",
-            "__v": 0
-        }
-    ],
-    "eventsCont": 2
+  "events": [
+    {
+      "_id": "62be1e49fd86eb39d04da902",
+      "title": "event1",
+      "description": "I'm admin.",
+      "start_Date": "2022-06-30T00:00:00.000Z",
+      "end_Date": "2022-06-30T00:00:00.000Z",
+      "category": "job",
+      "is_International": null,
+      "is_Job_Event": null,
+      "is_Very_Important": null,
+      "cost": null,
+      "createdAt": "2022-06-30T22:06:01.757Z",
+      "updatedAt": "2022-06-30T22:06:01.757Z",
+      "__v": 0
+    },
+    {
+      "_id": "62be1ea7fd86eb39d04da905",
+      "title": "event2",
+      "description": "I'm admin.",
+      "start_Date": "2022-06-30T00:00:00.000Z",
+      "end_Date": "2022-06-30T00:00:00.000Z",
+      "category": "job",
+      "is_International": null,
+      "is_Job_Event": null,
+      "is_Very_Important": null,
+      "cost": null,
+      "createdAt": "2022-06-30T22:07:35.580Z",
+      "updatedAt": "2022-06-30T22:07:35.580Z",
+      "__v": 0
+    }
+  ],
+  "eventsCont": 2
 }
 ```
 
@@ -279,13 +279,11 @@ Make sure the right content type like Content-Type: application/json; charset=ut
 
 ```json
 {
-    "userInterest": {
-        "interest_List": [
-            "job"
-        ],
-        "is_International": null,
-        "need_Job": null
-    }
+  "userInterest": {
+    "interest_List": ["job"],
+    "is_International": null,
+    "need_Job": null
+  }
 }
 ```
 
@@ -297,14 +295,14 @@ If a request fails any validations, expect a 400 and errors in the following for
 
 ```json
 {
-"errors": [
-    {       
-        "value": "", 
-        "msg": "Event title can't be empty",
-        "param": "event.title",
-        "location": "body"
+  "errors": [
+    {
+      "value": "",
+      "msg": "Event title can't be empty",
+      "param": "event.title",
+      "location": "body"
     }
-]
+  ]
 }
 ```
 

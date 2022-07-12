@@ -4,34 +4,38 @@ const { Event } = require("../model")
 // List Events
 exports.listEvents = async (req, res, next) => {
   try {
-    // Parse data parameters and set default values
-    const { limit, category, is_International, is_Job_Event, is_Very_Important } = req.query
-    // define a filter object
-    const filter = {}
+
+    const { limit, category, is_International, is_Job_Event, is_Very_Important, filterMethod } = req.query
+    const filterList = new Array()
+
     // As long as it contains a category, it can be queried
     if (category) {
-      // As long as it contains one of input categories, it can be queried  
       const categoryArr = category.split(",")
       const newCategory = categoryArr.join("|")
       let regCategory = new RegExp(newCategory)
-      filter.category = regCategory
+      filterList.push({ 'category': regCategory })
     }
+
     if (is_International) {
-      filter.is_International = is_International
+      filterList.push({ 'is_International': is_International })
     }
+
     if (is_Job_Event) {
-      filter.is_Job_Event = is_Job_Event
+      filterList.push({ 'is_Job_Event': is_Job_Event })
     }
     if (is_Very_Important) {
-      filter.is_Very_Important = is_Very_Important
+      filterList.push({ 'is_Very_Important': is_Very_Important })
     }
-    if (!limit) {
-      filter.limit = 100
-    } else { filter.limit = limit }
-    //console.log(filter.limit)
-    //console.log(req.query)
+
+    if (filterMethod == 'and') {
+      filter = { $and: filterList }
+    } else {
+      filter = { $or: filterList }
+    }
+
     const events = await Event.find(filter)
-      .limit(+limit) // How many bars to take
+      .limit(+limit)
+
     const eventsCont = await Event.countDocuments()
     res.status(200).json({
       events,
