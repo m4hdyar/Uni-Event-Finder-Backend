@@ -24,7 +24,7 @@ Run the command `nodemon app.js` to start the server, and navigate to http://loc
   npm install
   nodemon app.js
 ```
-*For frontend you can refer to *
+*For frontend you can refer to https://github.com/m4hdyar/uni-event-finder*
 
 ## Features
 - User can register and the Authentication is with JWT;
